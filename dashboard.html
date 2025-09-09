@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskly - Dashboard</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="hamburger" onclick="toggleSidebar()">☰</div>
+        <div class="logo">
+            <img src="assets/img/favicon.png" alt="Logo Taskly">
+            <h1>Taskly</h1>
+        </div>
+        
+    </header>
+    
+  <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div>
+        <div class="profile">👤 User</div>
+        <div class="menu">
+          <a href="add-task.html">➕ Agregar tarea</a>
+          <a href="#">📅 Calendario</a>
+          <a href="kanban.html">🙂 Mis tareas</a>
+        </div>
+      </div>
+      <div class="bottom">
+        <a href="#">⚙️ Configuración</a>
+        <a href="index.html" onclick="return confirmarLogout()">↩️ Cerrar Sesión</a>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <h2>Good Night, User.</h2>
+      <div class="cards">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card small"></div>
+      </div>
+      <div class="task">✔️ Tarea pendiente 1</div>
+      <div class="task">✔️ Tarea pendiente 2</div>
+    </div>
+  </div>
+
+  <!-- Floating button -->
+  <div class="fab" onclick="window.location.href='add-task.html'">+</div>
+
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+    </script>
+
+
+    
+
+    
+</body>
+</html>
