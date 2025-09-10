@@ -152,11 +152,15 @@ a.btn-secondary:hover {
 }
 
 .hero-img img {
-  max-width: 400px;
-  width: 100%;
+  max-width: 35vw;
+  min-width: 120px;
+  width: 320 px;
   border-radius: var(--border-radius);
+  display: block;
   
 }
+
+
 
 /* ==============================
    Features (cards)
@@ -339,40 +343,88 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5rem;
+  gap: 3rem;
   padding: 2rem 0;
+  min-height: 80vh;
   
 }
 
 .formularioRegistro {
-  width: 600px;
-  margin-left: 50px;
+  width: 420px;
+  margin-left: 0;
   background-color: #eddcfa;
-  padding: 5rem;
+  padding: 2.5rem 2rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .formularioRegistro h1 {
   padding-bottom: 20px;
   text-align: center;
   border-bottom: 1px solid silver;
+  margin-top: 1.2rem;
+  font-size: 2rem;
 }
 
 .formularioRegistro form {
   padding: 1rem 40px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
+  width: 100%;
 }
 
 .formularioRegistro input {
   width: 100%;
-  padding: 15px;
-  border: 1px solid silver;
+  padding: 1rem 1.1rem;
+  border: 1px solid #ccc;
   border-radius: var(--border-radius);
   background-color: #F3EBFA;
   font-size: 1rem;
+  margin-bottom: 0.2rem;
+  box-sizing: border-box;
+}
+
+.password-hint {
+  font-size: 0.95rem;
+  color: #7c3aed;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .registro-main {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .formularioRegistro {
+    margin-left: 0;
+    width: 95vw;
+    max-width: 420px;
+  }
+  .hero-img img {
+    width: 180px;
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .registro-main {
+    padding: 0.5rem 0;
+  }
+  .formularioRegistro {
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+  .hero-img {
+    display: none; /* oculta la imagen en móvil */
+  }
 }
 
 /* ==============================
