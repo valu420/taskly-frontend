@@ -1,23 +1,34 @@
 import http from "../api/http.js";
 
 /**
- * Crear una nueva tarea
- * @param {Object} taskData - Datos de la tarea
- * @returns {Promise<Object>}
+ * Creates a new task by sending a POST request to the backend.
+ * @param {Object} taskData - Task data.
+ * @param {string} taskData.title - Task title.
+ * @param {string} taskData.description - Task description.
+ * @param {string} taskData.status - Task status.
+ * @param {string} taskData.date - Task date.
+ * @param {string} taskData.hour - Task hour.
+ * @param {boolean} taskData.completed - Task completion state.
+ * @returns {Promise<Object>} Promise resolving to the created task.
  */
 export const addTask = async (taskData) => {
   const response = await http.post("/tasks", taskData);
-  return response.data; // axios devuelve {data, status, ...}
+  return response.data; // axios returns {data, status, ...}
 };
 
-// --- CONEXIÓN CON EL FORMULARIO ---
+// --- FORM CONNECTION ---
+
+/**
+ * Handles the task creation form submission.
+ * Collects form data, validates it, and sends it to the backend.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("taskForm");
   if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // Obtener valores del formulario
+    // Get form values
     const title = document.getElementById("titulo").value.trim();
     const description = document.getElementById("descripcion").value.trim();
     const status = document.getElementById("status").value;
@@ -25,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const hour = document.getElementById("hour").value;
     const completed = document.getElementById("completed").checked;
 
-    // Validación básica
+    // Basic validation
     if (!title || !date || !hour) {
-      alert("Por favor, completa todos los campos obligatorios.");
+      alert("Please complete all required fields.");
       return;
     }
 
@@ -40,11 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
         hour,
         completed
       });
-      alert("Tarea creada exitosamente ");
+      alert("Task created successfully.");
       form.reset();
     } catch (error) {
-      console.error("Error creando tarea:", error);
-      alert("No se pudo crear la tarea. Intenta de nuevo.");
+      console.error("Error creating task:", error);
+      alert("Could not create the task. Please try again.");
     }
   });
 });

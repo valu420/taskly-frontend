@@ -67,7 +67,8 @@ header .logo h1 {
 button,
 a.btn-primary,
 a.btn-secondary {
-  padding: 0.7rem 1rem;
+  padding: 0.9rem 0rem;
+  width: 100%;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -76,12 +77,14 @@ a.btn-secondary {
   text-decoration: none;
   display: inline-block;
   transition: background 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 /* Botón principal */
 .btn-primary,
 a.btn-primary {
   background-color: var(--color-btn-primary);
+
 }
 
 .btn-primary:hover,
@@ -219,8 +222,9 @@ footer {
 .link {
   color: var(--color-btn-secondary);
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: underline;
   margin-left: 0.3rem;
+  font-size: 0.98rem;
 }
 
 .link:hover {
@@ -232,19 +236,26 @@ footer {
    LOGIN PAGE
    ============================== */
 .login-page {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr;
   min-height: 80vh;
   align-items: center;
-  gap: 15px;
-  padding: 2rem;
+  gap: 2rem;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-box {
   background-color: #eddcfa;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 350px;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-box h2 {
@@ -256,9 +267,9 @@ footer {
 .login-form input {
   display: block;
   width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: none;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
   border-radius: var(--border-radius);
   background-color: #F3EBFA;
   font-size: 1rem;
@@ -271,10 +282,10 @@ footer {
 
 .forgot-link {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.98rem;
   margin-bottom: 1rem;
   color: var(--color-btn-secondary);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .forgot-link:hover {
@@ -282,11 +293,43 @@ footer {
 }
 
 .login-img img {
-  width: 100%;
-  max-width: 300px;
+  width: 260px;
+  max-width: 90vw;
   display: block;
   margin: 0 auto;
   border-radius: var(--border-radius);
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .login-page {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
+  .login-img img {
+    width: 180px;
+  }
+  .login-box, .login-img {
+    width: 95vw;
+    max-width: 420px;
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-box, .login-img {
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+  }
+  .login-img img {
+    width: 120px;
+  }
+  .login-form input, .btn-primary {
+    font-size: 0.98rem;
+    padding: 0.7rem 0.8rem;
+  }
 }
 
 /* ==============================
