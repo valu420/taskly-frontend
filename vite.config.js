@@ -1,3 +1,6 @@
+import { defineConfig } from "vite";
+
+
 // Configuración para múltiples páginas
 export default defineConfig({
   root: ".", // raíz del proyecto
