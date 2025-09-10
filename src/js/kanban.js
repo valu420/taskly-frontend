@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Obtener tareas
     const res = await getTasks();
-    const tasks = res.data;
+    const tasks = Array.isArray(res.data) ? res.data : res.data.tasks;
 
     // Referencias a columnas
     const columns = {
