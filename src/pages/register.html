@@ -31,11 +31,24 @@
           <input type="email" id="email" placeholder="Ingrese su email" required />
         </div>
         <div>
-          <input type="password" id="password" placeholder="Ingrese su contraseña" required />
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Ingrese su contraseña" 
+            required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[.,/@!])(?=.{8,}).*$"
+            title="La contraseña debe tener mínimo 8 caracteres, incluir una mayúscula, una minúscula y un caracter especial (.,/@!)"
+          />
         </div>
         <div>
           <input type="password" id="confirmPassword" placeholder="Confirme su contraseña" required />
         </div>
+
+        <!-- Mensaje de ayuda -->
+        <p class="password-hint">
+          ⚠️ La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un caracter especial (.,/@!).
+        </p>
+
         <button type="submit" class="btn-secondary">Registrarse</button>
       </form>
     </div>
