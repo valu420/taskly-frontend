@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const email = localStorage.getItem("userEmail");
   const name = localStorage.getItem("userName");
 
-  if (!name) {
+  if (!email) {
   window.location.href = "login.html";
   return;
   }
