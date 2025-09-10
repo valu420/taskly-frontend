@@ -1,14 +1,8 @@
 import { getTasks, updateTask, deleteTask } from "../services/taskService.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const email = localStorage.getItem("userEmail");
-  if (!email) {
-    window.location.href = "login.html";
-    return;
-  }
-
   try {
-    // Obtener tareas (desde backend o localStorage, según tu implementación)
+    // Obtener tareas
     const res = await getTasks();
     const tasks = res.data;
 
@@ -54,10 +48,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             try {
               await deleteTask(task._id);
               taskCard.remove();
-              alert("✅ Tarea eliminada correctamente");
             } catch (error) {
               console.error("Error eliminando tarea:", error);
-              alert("❌ No se pudo eliminar la tarea.");
             }
           }
         });
@@ -111,14 +103,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           col.appendChild(taskCard);
         } catch (error) {
           console.error("Error actualizando estado:", error);
-          alert("❌ No se pudo mover la tarea.");
         }
       });
     });
   } catch (error) {
     console.error("Error cargando Kanban:", error);
-    alert("Error al cargar tus tareas. Inicia sesión nuevamente.");
-    localStorage.removeItem("userEmail");
-    window.location.href = "login.html";
   }
 });
