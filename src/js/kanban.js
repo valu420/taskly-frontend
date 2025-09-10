@@ -1,14 +1,14 @@
 import { getTasks, updateTask, deleteTask } from "../services/taskService.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
+  const email = localStorage.getItem("userEmail");
+  if (!email) {
     window.location.href = "login.html";
     return;
   }
 
   try {
-    // Obtener tareas
+    // Obtener tareas (desde backend o localStorage, según tu implementación)
     const res = await getTasks();
     const tasks = res.data;
 
@@ -43,22 +43,24 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button class="delete-btn" title="Eliminar">❌</button>
         </div>
         <p>${task.description}</p>
-        <small>⏳ ${task.priority} | 📅 ${task.endDate}</small>
+        <small>📌 ${task.status} | 📅 ${task.date} ⏰ ${task.hour}</small>
       `;
 
       // Botón eliminar
-      taskCard.querySelector(".delete-btn").addEventListener("click", async () => {
-        if (confirm("¿Seguro que deseas eliminar esta tarea?")) {
-          try {
-            await deleteTask(task._id);
-            taskCard.remove();
-            alert("✅ Tarea eliminada correctamente");
-          } catch (error) {
-            console.error("Error eliminando tarea:", error);
-            alert("❌ No se pudo eliminar la tarea.");
+      taskCard
+        .querySelector(".delete-btn")
+        .addEventListener("click", async () => {
+          if (confirm("¿Seguro que deseas eliminar esta tarea?")) {
+            try {
+              await deleteTask(task._id);
+              taskCard.remove();
+              alert("✅ Tarea eliminada correctamente");
+            } catch (error) {
+              console.error("Error eliminando tarea:", error);
+              alert("❌ No se pudo eliminar la tarea.");
+            }
           }
-        }
-      });
+        });
 
       // Drag start
       taskCard.addEventListener("dragstart", (e) => {
@@ -66,13 +68,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       switch (task.status) {
-        case "ToDo":
+        case "pending":
           columns.todo.appendChild(taskCard);
           break;
-        case "InProgress":
+        case "in-progress":
           columns.inProgress.appendChild(taskCard);
           break;
-        case "Done":
+        case "done":
           columns.done.appendChild(taskCard);
           break;
         default:
@@ -97,7 +99,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const taskId = e.dataTransfer.getData("taskId");
         const newStatus =
-          key === "todo" ? "ToDo" : key === "inProgress" ? "InProgress" : "Done";
+          key === "todo"
+            ? "pending"
+            : key === "inProgress"
+            ? "in-progress"
+            : "done";
 
         try {
           await updateTask(taskId, { status: newStatus });
@@ -112,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error cargando Kanban:", error);
     alert("Error al cargar tus tareas. Inicia sesión nuevamente.");
-    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
     window.location.href = "login.html";
   }
 });
