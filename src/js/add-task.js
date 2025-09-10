@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hour,
         completed
       });
-      alert("Tarea creada exitosamente ✅");
+      alert("Tarea creada exitosamente ");
       form.reset();
     } catch (error) {
       console.error("Error creando tarea:", error);
