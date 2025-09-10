@@ -4,18 +4,17 @@ import { getTasks } from "../services/taskService.js";
 // Proteger la página
 document.addEventListener("DOMContentLoaded", async () => {
   // Verificar si el usuario ya inició sesión
-  const email = localStorage.getItem("userEmail");
+  const name = localStorage.getItem("userName");
 
-  if (!email) {
-    // Si no hay correo guardado, redirigir al login
-    window.location.href = "login.html";
-    return;
+  if (!name) {
+  window.location.href = "login.html";
+  return;
   }
 
   try {
-    // Mostrar el correo en el sidebar y saludo
-    document.getElementById("userName").textContent = email;
-    document.getElementById("greeting").textContent = `Hola, ${email} 👋`;
+    // Mostrar el nombre en el sidebar y saludo
+    document.getElementById("userName").textContent = name;
+document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
 
     // Aquí podrías simular carga de tareas
     const tasksContainer = document.getElementById("tasksContainer");
