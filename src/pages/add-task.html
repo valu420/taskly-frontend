@@ -19,33 +19,29 @@
   <!-- Formulario Crear Tarea -->
   <main class="form-container">
     <h2>Crear nueva tarea</h2>
-    <form id="taskForm" class="task-form">
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" required>
+<form id="taskForm">
+  <input type="text" id="titulo" placeholder="Título de la tarea" required>
+  <textarea id="descripcion" placeholder="Descripción"></textarea>
 
-      <label for="descripcion">Descripción</label>
-      <textarea id="descripcion" rows="4" required></textarea>
+  <label for="status">Estado</label>
+  <select id="status" required>
+    <option value="pending">Por hacer</option>
+    <option value="in_progress">Haciendo</option>
+    <option value="done">Terminada</option>
+  </select>
 
-      <div class="form-row">
-        <div>
-          <label for="fechaInicio">Fecha inicio</label>
-          <input type="date" id="fechaInicio" required>
-        </div>
-        <div>
-          <label for="fechaCierre">Fecha cierre</label>
-          <input type="date" id="fechaCierre" required>
-        </div>
-      </div>
+  <label for="date">Fecha</label>
+  <input type="date" id="date" required>
 
-      <label for="prioridad">Prioridad</label>
-      <select id="prioridad" required>
-        <option value="Alta">Alta</option>
-        <option value="Media">Media</option>
-        <option value="Baja">Baja</option>
-      </select>
+  <label for="hour">Hora</label>
+  <input type="time" id="hour" required>
 
-      <button type="submit" class="btn-primary">Guardar Tarea</button>
-    </form>
+  <label>
+    <input type="checkbox" id="completed"> ¿Completada?
+  </label>
+
+  <button type="submit">Guardar tarea</button>
+</form>
   </main>
 
   <!-- Footer -->

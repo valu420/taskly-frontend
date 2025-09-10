@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await login({ email, password });
 
         // Guardar token JWT en localStorage
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.token);
 
         // Redirigir al dashboard
         window.location.href = "dashboard.html";
