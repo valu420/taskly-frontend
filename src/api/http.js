@@ -1,4 +1,23 @@
 const API_URL = import.meta.env.VITE_API_URL;
+import axios from "axios";
+
+const http = axios.create({
+  baseURL: "http://localhost:3000/api", // tu backend
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Interceptor para añadir el token JWT si existe
+http.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export default http;
 
 // Función genérica para peticiones HTTP
 async function request(endpoint, { method = 'GET', body, headers = {} } = {}) {
