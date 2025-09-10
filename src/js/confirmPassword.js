@@ -1,6 +1,8 @@
+import http from "../api/http.js";
+
 const form = document.getElementById("changePasswordForm");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const newPassword = document.getElementById("new-password").value.trim();
@@ -16,10 +18,17 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  // Simulación
-  alert("✅ Tu contraseña ha sido cambiada exitosamente.");
-  form.reset();
+  try {
+    // Llamada real al backend
+    await http.post("/auth/change-password", { password: newPassword });
 
-  // Redirigir al login
-  window.location.href = "login.html";
+    alert("✅ Tu contraseña ha sido cambiada exitosamente.");
+    form.reset();
+
+    // Redirigir al login
+    window.location.href = "login.html";
+  } catch (error) {
+    console.error("Error cambiando la contraseña:", error);
+    alert("❌ No se pudo cambiar la contraseña. Intenta de nuevo.");
+  }
 });
