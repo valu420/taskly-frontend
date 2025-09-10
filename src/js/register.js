@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const response = await register({
-          nombre,
-          apellidos,
-          edad,
+          firstName: nombre,
+          lastName: apellidos,
+          age: edad,
           email,
           password,
+          confirmPassword
         });
 
         alert("Registro exitoso 🎉 Ahora puedes iniciar sesión.");
