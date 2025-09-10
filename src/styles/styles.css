@@ -464,18 +464,25 @@ footer {
    FORMULARIO CREAR TAREA
    ============================== */
 .form-container {
-  max-width: 600px;
-  margin: 3rem auto;
+  max-width: 480px;
+  margin: 2rem auto;
   padding: 2rem;
   background: #fff;
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .form-container h2 {
   text-align: center;
   color: var(--color-btn-primary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.8rem;
+  font-size: 1.5rem;
 }
 
 .task-form label {
@@ -489,26 +496,110 @@ footer {
 .task-form textarea,
 .task-form select {
   width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1.5rem;
-  border: none;
+  padding: 10px 14px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
   border-radius: var(--border-radius);
   background-color: #F3EBFA;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #000;
+  box-sizing: border-box;
 }
 
 .task-form textarea {
   resize: vertical;
+  min-height: 90px;
 }
 
 .form-row {
   display: flex;
   gap: 1rem;
+  width: 100%;
 }
 
-.form-row div {
+.form-row > div {
   flex: 1;
+}
+
+.task-form select {
+  background-color: #F3EBFA;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+}
+
+.task-form button,
+.form-container button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.15rem;
+  border-radius: var(--border-radius);
+  background: var(--color-btn-primary);
+  color: #fff;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.task-form button:hover,
+.form-container button:hover {
+  background: #2c1242;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container input[type="time"],
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: #f3ebfa;
+  font-size: 1.1rem;
+  color: #333;
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="date"]:focus,
+.form-container input[type="time"]:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  box-shadow: 0 0 0 2px #dbafff;
+}
+
+.form-container textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-container select {
+  border: 1px solid #ccc;
+  background-color: #f3ebfa;
+  font-size: 1.1rem;
+}
+
+.form-container label {
+  font-weight: bold;
+  color: var(--color-btn-primary);
+  margin-bottom: 0.3rem;
+  display: block;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    width: 95%;
+    padding: 1.2rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 /* ===== Kanban Styles ===== */
