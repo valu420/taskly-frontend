@@ -3,8 +3,8 @@ import { getTasks } from "../services/taskService.js";
 
 // Proteger la página
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
+  const email = localStorage.getItem("userEmail");
+  if (!email) {
     window.location.href = "login.html";
     return;
   }
