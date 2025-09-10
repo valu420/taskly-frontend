@@ -3,27 +3,26 @@ import { getTasks } from "../services/taskService.js";
 
 // Proteger la página
 document.addEventListener("DOMContentLoaded", async () => {
+  // Verificar si el usuario ya inició sesión
   const email = localStorage.getItem("userEmail");
+
   if (!email) {
+    // Si no hay correo guardado, redirigir al login
     window.location.href = "login.html";
     return;
   }
 
   try {
-    // Obtener usuario actual desde el backend
-    const userRes = await http.get("/auth/me");
-    const user = userRes.data;
+    // Mostrar el correo en el sidebar y saludo
+    document.getElementById("userName").textContent = email;
+    document.getElementById("greeting").textContent = `Hola, ${email} 👋`;
 
-    // Mostrar el nombre en el sidebar y saludo
-    document.getElementById("userName").textContent = user.nombre;
-    document.getElementById("greeting").textContent = `Hola, ${user.nombre} 👋`;
-
-    // Cargar tareas
-    const tasksRes = await getTasks();
-    const tasks = tasksRes.data;
-
+    // Aquí podrías simular carga de tareas
     const tasksContainer = document.getElementById("tasksContainer");
     tasksContainer.innerHTML = "";
+
+    // Si aún no conectas con backend, simulamos tareas de prueba
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
     if (tasks.length === 0) {
       tasksContainer.innerHTML = "<p>No tienes tareas pendientes.</p>";
@@ -35,18 +34,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         tasksContainer.appendChild(taskDiv);
       });
     }
-
   } catch (error) {
     console.error("Error cargando dashboard:", error);
-    alert("Tu sesión ha expirado. Vuelve a iniciar sesión.");
-    localStorage.removeItem("token");
-    window.location.href = "login.html";
+    alert("Ocurrió un error al cargar el dashboard.");
   }
 
   // Logout
   document.getElementById("logoutBtn").addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail"); // eliminamos el email guardado
     window.location.href = "login.html";
   });
 });
