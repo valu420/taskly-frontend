@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Guardar token JWT en localStorage
         localStorage.setItem("token", response.token);
+        localStorage.setItem("userEmail", email);
 
         // Redirigir al dashboard
         window.location.href = "dashboard.html";
