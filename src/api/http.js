@@ -2,7 +2,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: "http://localhost:3000/api", // tu backend
+  baseURL: "https://mini-proyecto1-backend.onrender.com/", // tu backend
   headers: {
     "Content-Type": "application/json",
   },
