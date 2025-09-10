@@ -28,7 +28,9 @@
 
 body {
   font-family: var(--font-family);
+  min-height: 100vh;
   background: linear-gradient(#ffffff 70%, #e1c8f4 100%);
+  background-attachment: fixed;
   color: var(--text-color);
 }
 
@@ -84,7 +86,7 @@ a.btn-primary {
 
 .btn-primary:hover,
 a.btn-primary:hover {
-  background-color: #2c1242;
+  background-color: #dbafff;
 }
 
 /* Botón secundario */
@@ -143,12 +145,14 @@ a.btn-secondary:hover {
   display: flex;
   justify-content: center;
   animation: fadeInUp 1.5s ease forwards;
+  
 }
 
 .hero-img img {
   max-width: 400px;
   width: 100%;
   border-radius: var(--border-radius);
+  
 }
 
 /* ==============================
@@ -294,6 +298,7 @@ footer {
   justify-content: center;
   gap: 5rem;
   padding: 2rem 0;
+  
 }
 
 .formularioRegistro {
@@ -601,4 +606,103 @@ footer {
 
 .priority-low {
   border-left-color: #a6efc4;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #c0392b;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
+}
+
+
+/* ==============================
+   RECOVER PASSWORD PAGE
+   ============================== */
+
+
+.recoverPassword {
+  max-width: 480px;
+  margin: 5rem auto;
+  padding: 2.5rem;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.recoverPassword h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid silver;
+  color: var(--color-btn-primary);
+}
+
+.recoverPassword form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.recoverPasswordMessage {
+  text-align: justify;
+  margin: 0.5rem 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 200; 
+}
+
+.recoverPassword input {
+  width: 100%;
+  max-width: 400px;
+  min-width: 200px;
+  margin: 0 auto 1rem auto;
+  text-align: left;
+  font-size: 1.05rem;
+  padding: 1.1rem 1.2rem;
+  box-sizing: border-box;
+  word-break: break-word;
+  border: 1px solid silver;
+  border-radius: var(--border-radius);
+  background-color: #F3EBFA;
+  display: block;
+}
+
+.recoverPassword input::placeholder {
+  font-size: 1rem;
+  color: #888;
+  text-align: left;
+}
+  /* Centrar el botón también */
+
+.recoverPassword button {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .recoverPassword {
+    width: 90%;
+    padding: 1.5rem;
+  }
 }

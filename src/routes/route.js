@@ -6,6 +6,9 @@ const routes = {
   '/dashboard': 'src/views/dashboard.html',
   '/add-task': 'src/views/add-task.html',
   '/kanban': 'src/views/kanban.html',
+  '/recover-password': 'src/views/recoverPassword.html',
+  '/confirm-password': 'src/views/confirmPassword.html',
+  
 };
 
 // Navega a una ruta específica
