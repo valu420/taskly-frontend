@@ -4,6 +4,7 @@ import { getTasks } from "../services/taskService.js";
 // Proteger la página
 document.addEventListener("DOMContentLoaded", async () => {
   // Verificar si el usuario ya inició sesión
+  const email = localStorage.getItem("userEmail");
   const name = localStorage.getItem("userName");
 
   if (!name) {
