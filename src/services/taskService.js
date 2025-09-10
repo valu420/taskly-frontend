@@ -1,15 +1,15 @@
 import http from "../api/http.js";
 
 /**
- * Obtener todas las tareas del usuario autenticado
+ * Get all tasks of the authenticated user
  */
 export const getTasks = () => {
   return http.get("/tasks");
 };
 
 /**
- * Crear una nueva tarea
- * @param {Object} taskData - { title, description, startDate, endDate, priority }
+ * Create a new task
+ * @param {Object} taskData - { title, description, date, hour, status, completed} }
  */
 export const addTask = (taskData) => {
   return http.post("/tasks", taskData);
@@ -18,7 +18,7 @@ export const addTask = (taskData) => {
 /**
  * Actualizar una tarea existente
  * @param {string} taskId - ID de la tarea
- * @param {Object} updates - { title?, description?, startDate?, endDate?, priority?, status? }
+ * @param {Object} updates - { title?, description?, date?, hour?, status?, completed? }
  */
 export const updateTask = (taskId, updates) => {
   return http.put(`/tasks/${taskId}`, updates);
