@@ -6,11 +6,10 @@
  */
 
 import './styles/styles.css';
-import { initRouter } from './routes/route.js';
+import { navigateTo, getCurrentRoute } from './routes/route.js';
 
+// Ejemplo: mostrar en consola la ruta actual
+console.log("Ruta actual:", getCurrentRoute());
 
-/**
- * Initialize the client-side router.
- * This sets up listeners and renders the correct view on app start.
- */
-initRouter();
+// Ejemplo: redirigir al home al iniciar
+// navigateTo('/home');
