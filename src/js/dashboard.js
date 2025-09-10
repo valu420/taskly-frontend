@@ -1,27 +1,32 @@
 import http from "../api/http.js";
 import { getTasks } from "../services/taskService.js";
 
-// Proteger la página
+/**
+ * Initializes the dashboard page.
+ * Checks user authentication, displays user info, loads tasks, and handles logout.
+ */
 document.addEventListener("DOMContentLoaded", async () => {
-  // Verificar si el usuario ya inició sesión
+  // Check if the user is logged in
   const email = localStorage.getItem("userEmail");
   const name = localStorage.getItem("userName");
 
   if (!email) {
-  window.location.href = "login.html";
-  return;
+    window.location.href = "login.html";
+    return;
   }
 
   try {
-    // Mostrar el nombre en el sidebar y saludo
+    // Display the user's name in the sidebar and greeting
     document.getElementById("userName").textContent = name;
-document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
+    document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
 
-    // Aquí podrías simular carga de tareas
+    // Load tasks (currently from localStorage, can be replaced with backend)
     const tasksContainer = document.getElementById("tasksContainer");
     tasksContainer.innerHTML = "";
 
-    // Si aún no conectas con backend, simulamos tareas de prueba
+    /**
+     * @type {Array<{title: string}>}
+     */
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
     if (tasks.length === 0) {
@@ -35,14 +40,14 @@ document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
       });
     }
   } catch (error) {
-    console.error("Error cargando dashboard:", error);
-    alert("Ocurrió un error al cargar el dashboard.");
+    console.error("Error loading dashboard:", error);
+    alert("An error occurred while loading the dashboard.");
   }
 
-  // Logout
+  // Logout handler
   document.getElementById("logoutBtn").addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.removeItem("userEmail"); // eliminamos el email guardado
+    localStorage.removeItem("userEmail");
     window.location.href = "login.html";
   });
 });

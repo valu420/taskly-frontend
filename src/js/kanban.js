@@ -1,19 +1,29 @@
 import { getTasks, updateTask, deleteTask } from "../services/taskService.js";
 
+/**
+ * Initializes the Kanban board on DOMContentLoaded.
+ * Fetches tasks, renders them in columns, and enables drag-and-drop and delete functionality.
+ */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // Obtener tareas
+    // Fetch tasks from backend
     const res = await getTasks();
+    /**
+     * @type {Array<Object>} List of tasks
+     */
     const tasks = Array.isArray(res.data) ? res.data : res.data.tasks;
 
-    // Referencias a columnas
+    /**
+     * References to Kanban columns.
+     * @type {{todo: HTMLElement, inProgress: HTMLElement, done: HTMLElement}}
+     */
     const columns = {
       todo: document.getElementById("todo"),
       inProgress: document.getElementById("in-progress"),
       done: document.getElementById("done"),
     };
 
-    // Limpiar columnas
+    // Clear columns and set headers
     Object.entries(columns).forEach(([key, col]) => {
       col.innerHTML = `<h3>${
         key === "todo"
@@ -24,8 +34,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       }</h3>`;
     });
 
-    // Renderizar tareas
+    // Render each task in the appropriate column
     tasks.forEach((task) => {
+      /**
+       * Task card element.
+       * @type {HTMLDivElement}
+       */
       const taskCard = document.createElement("div");
       taskCard.classList.add("task-card");
       taskCard.setAttribute("draggable", "true");
@@ -40,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <small>📌 ${task.status} | 📅 ${task.date} ⏰ ${task.hour}</small>
       `;
 
-      // Botón eliminar
+      // Delete button handler
       taskCard
         .querySelector(".delete-btn")
         .addEventListener("click", async () => {
@@ -54,11 +68,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
 
-      // Drag start
+      // Drag start handler
       taskCard.addEventListener("dragstart", (e) => {
         e.dataTransfer.setData("taskId", task._id);
       });
 
+      // Place task in the correct column based on status
       switch (task.status) {
         case "pending":
           columns.todo.appendChild(taskCard);
@@ -74,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    // Configurar droppable en columnas
+    // Enable columns as drop targets for drag-and-drop
     Object.entries(columns).forEach(([key, col]) => {
       col.addEventListener("dragover", (e) => {
         e.preventDefault();

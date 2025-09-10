@@ -1,5 +1,9 @@
 import { login } from "../services/userService.js";
 
+/**
+ * Initializes the login form event listener on DOMContentLoaded.
+ * Handles user login, stores JWT token and user email in localStorage, and redirects to dashboard.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
@@ -7,22 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      /** @type {string} */
       const email = document.getElementById("email").value.trim();
+      /** @type {string} */
       const password = document.getElementById("password").value.trim();
 
       try {
-        // Llamada al backend
+        // Calls backend to authenticate user
         const response = await login({ email, password });
 
-        // Guardar token JWT en localStorage
+        // Stores JWT token and user email in localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userEmail", email);
 
-        // Redirigir al dashboard
+        // Redirects to dashboard
         window.location.href = "dashboard.html";
       } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-        alert("Credenciales inválidas. Intenta nuevamente.");
+        console.error("Login error:", error);
+        alert("Invalid credentials. Please try again.");
       }
     });
   }
