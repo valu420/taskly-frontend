@@ -32,6 +32,8 @@ body {
   background: linear-gradient(#ffffff 70%, #e1c8f4 100%);
   background-attachment: fixed;
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==============================
@@ -41,14 +43,17 @@ header {
   background-color: var(--color-header);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  position: relative;
   padding: 1rem 2rem;
+  padding-left: 0;
 }
 
 header .logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-left: 0;
 }
 
 header .logo img {
@@ -144,19 +149,21 @@ a.btn-secondary:hover {
 }
 
 .hero-img {
-  flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
-  animation: fadeInUp 1.5s ease forwards;
+  padding: 2rem;
+  height: 100%;
   
 }
 
 .hero-img img {
-  max-width: 35vw;
+  max-width: 320vw;
   min-width: 120px;
-  width: 320 px;
-  border-radius: var(--border-radius);
+  width: 300px;
   display: block;
+  height: auto;
+  
   
 }
 
@@ -208,6 +215,7 @@ footer {
   padding: 1rem;
   background-color: var(--color-header);
   margin-top: 2rem;
+  flex-shrink: 0;
 }
 
 /* ==============================
@@ -248,6 +256,8 @@ footer {
   padding: 2rem 0;
   justify-content: center;
   align-items: center;
+  flex: 1 0 auto;
+
 }
 
 .login-box {
@@ -343,15 +353,16 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
-  padding: 2rem 0;
+  gap: 5rem;
+  padding: 3rem 0;
   min-height: 80vh;
   
 }
 
 .formularioRegistro {
-  width: 420px;
+  width: 520px;
   margin-left: 0;
+  margin-right: 0;
   background-color: #eddcfa;
   padding: 2.5rem 2rem;
   border-radius: var(--border-radius);
@@ -432,21 +443,23 @@ footer {
    ============================== */
 .layout {
   display: flex;
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 .sidebar {
-  width: 220px;
+  width: 240px;
+  min-width: 200px;
   height: 100vh;
   background: #C9A3E6;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 80px 15px 20px;
+  padding: 2rem 1rem 1rem 1rem;
   position: fixed;
   top: 0;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
+  padding-top: 4.5rem;
 }
 
 .sidebar.active {
@@ -459,7 +472,7 @@ footer {
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .sidebar .menu,
@@ -487,15 +500,17 @@ footer {
   flex: 1;
   margin-left: 0;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   transition: margin-left 0.3s ease;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
   .sidebar.active ~ .main {
     margin-left: 220px;
+    
   }
 }
 
@@ -527,20 +542,21 @@ footer {
 /* Botón flotante */
 .fab {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 55px;
-  height: 55px;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: var(--color-btn-secondary);
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
   transition: background 0.3s ease;
+  z-index: 100;
 }
 
 .fab:hover {
@@ -548,12 +564,103 @@ footer {
 }
 
 .hamburger {
-  margin-right: 1.5rem;
+  margin-left: 1rem;      /* Espacio desde el borde izquierdo */
+  margin-right: 1.2rem;   /* Espacio entre botón y logo */
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 2;
   display: block;
+  user-select: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-self: center;
+  
 }
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    z-index: 200;
+    box-shadow: 2px 0 16px #0001;
+    transition: transform 0.3s ease-in-out;
+    padding-top: 4.5rem;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .main {
+    padding: 1.5rem 0.7rem 1rem 0.7rem;
+  }
+  .fab {
+    bottom: 1.2rem;
+    right: 1.2rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.7rem;
+  }
+  .hamburger {
+    
+    position: absolute;
+    left: 0.7rem;
+    top: 0.7rem;
+    z-index: 300;
+    font-size: 1.5rem;
+    padding: 0.3rem 0.5rem;
+    margin-right: 0.7rem;
+    margin-left: 0.7rem;
+  }
+  header .logo {
+    margin-left: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 90vw;
+    min-width: 0;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    transition: transform 0.3s ease-in-out;
+    padding-top: 3.2rem;
+  }
+  .main {
+    padding: 1rem 0.2rem 0.7rem 0.2rem;
+  }
+  .fab {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+  .cards {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hamburger {
+    font-size: 1.3rem;
+    padding: 0.2rem 0.4rem;
+    margin-right: 0.7rem;
+    margin-left: 0.5rem;
+    align-self: center;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  header header {
+    padding: 0.7rem 0.7rem 0.7rem 0;
+    min-height: 56px;
+    }
+}
+
+
 
 /* ==============================
    FORMULARIO CREAR TAREA
