@@ -58,4 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Could not create the task. Please try again.");
     }
   });
+
+  document.getElementById("logoutBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("userEmail");
+    window.location.href = "login.html";
+  });
 });
