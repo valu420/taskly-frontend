@@ -124,4 +124,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error cargando Kanban:", error);
   }
+
+  document.getElementById("logoutBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("userEmail");
+    window.location.href = "login.html";
+  });
 });
