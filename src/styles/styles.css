@@ -32,6 +32,8 @@ body {
   background: linear-gradient(#ffffff 70%, #e1c8f4 100%);
   background-attachment: fixed;
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==============================
@@ -147,19 +149,21 @@ a.btn-secondary:hover {
 }
 
 .hero-img {
-  flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
-  animation: fadeInUp 1.5s ease forwards;
+  padding: 2rem;
+  height: 100%;
   
 }
 
 .hero-img img {
-  max-width: 35vw;
+  max-width: 320vw;
   min-width: 120px;
-  width: 320 px;
-  border-radius: var(--border-radius);
+  width: 300px;
   display: block;
+  height: auto;
+  
   
 }
 
@@ -211,6 +215,7 @@ footer {
   padding: 1rem;
   background-color: var(--color-header);
   margin-top: 2rem;
+  flex-shrink: 0;
 }
 
 /* ==============================
@@ -251,6 +256,8 @@ footer {
   padding: 2rem 0;
   justify-content: center;
   align-items: center;
+  flex: 1 0 auto;
+
 }
 
 .login-box {
@@ -346,15 +353,16 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
-  padding: 2rem 0;
+  gap: 5rem;
+  padding: 3rem 0;
   min-height: 80vh;
   
 }
 
 .formularioRegistro {
-  width: 420px;
+  width: 520px;
   margin-left: 0;
+  margin-right: 0;
   background-color: #eddcfa;
   padding: 2.5rem 2rem;
   border-radius: var(--border-radius);

@@ -8,7 +8,7 @@ import { getTasks } from "../services/taskService.js";
 document.addEventListener("DOMContentLoaded", async () => {
   // Check if the user is logged in
   const email = localStorage.getItem("userEmail");
-  const name = localStorage.getItem("userName");
+  const name = localStorage.getItem("userName"); //cambiar
 
   if (!email) {
     window.location.href = "login.html";
