@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taskly - Dashboard</title>
-  <link rel="stylesheet" href="../styles/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Taskly</title>
+  <link rel="stylesheet" href="../styles/styles.css"/>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="hamburger" onclick="toggleSidebar()">☰</div>
-    <div class="logo">
-      <img src="../../public/favicon.png" alt="Logo Taskly">
-      <h1>Taskly</h1>
-    </div>
-  </header>
-  
-  <div class="layout">
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <div>
-        <div class="profile">👤 <span id="userName"></span></div>
-        <div class="menu">
-          <a href="add-task.html">➕ Agregar tarea</a>
-          <a href="#">📅 Calendario</a>
-          <a href="kanban.html">🙂 Mis tareas</a>
-        </div>
-      </div>
-      <div class="bottom">
-        <a href="configuration.html">⚙️ Configuración</a>
-        <a href="#" id="logoutBtn">↩️ Cerrar Sesión</a>
+<header>
+  <div class="hamburger" onclick="toggleSidebar()">☰</div>
+  <div class="logo">
+    <img src="../../public/favicon.png" alt="Logo Taskly"/>
+    <h1>Taskly</h1>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div>
+      <div class="profile">👤 <span id="userName">Cargando...</span></div>
+      <div class="menu">
+        <a href="dashboard.html">⚛️ Dashboard</a>
+        <a href="add-task.html">➕ Agregar tarea</a>
+        <a href="#">📅 Calendario</a>
+        <a href="kanban.html">🙂 Mis tareas</a>
       </div>
     </div>
-
-    <!-- Main -->
-    <div class="main">
-      <h2 id="greeting">Hola, Usuario 👋</h2>
-      
-      <!-- Botón para agregar nueva tarea -->
-      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-        <a href="add-task.html" class="btn-primary">Agregar nueva tarea</a>
-      </div>
-
-      <!-- Contenedor de tareas en tarjetas -->
-      <div id="tasksContainer" class="cards">
-        <!-- Las tareas se insertarán aquí como tarjetas -->
-        <p>Cargando tareas...</p>
-      </div>
+    <div class="bottom">
+      <a href="configuration.html">⚙️ Configuración</a>
+      <a href="#" id="logoutBtn">↩️ Cerrar Sesión</a>
     </div>
   </div>
 
-  <script type="module" src="../js/dashboard.js"></script>
-  <script>
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("active");
-    }
-  </script>
+  <!-- Contenido principal -->
+  <main class="dashboard-page">
+    <h2 id="greeting">Hola 👋</h2>
+
+    <!-- Vista horizontal de tareas -->
+    <section class="tasks-horizontal">
+      <h3>Tus Tareas</h3>
+      <div id="tasksContainer" class="tasks-row">
+        <p>Cargando tareas...</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>© 2025 - Taskly</p>
+</footer>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+  }
+</script>
+<script type="module" src="../js/dashboard.js"></script>
 </body>
 </html>
