@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     tasksContainer.innerHTML = "";
 
     /**
-     * @type {Array<{title: string}>}
+     * @type {Array<{title: string, description?: string, dueDate?: string, status?: string}>}
      */
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -33,10 +33,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       tasksContainer.innerHTML = "<p>No tienes tareas pendientes.</p>";
     } else {
       tasks.forEach((task) => {
-        const taskDiv = document.createElement("div");
-        taskDiv.classList.add("task");
-        taskDiv.textContent = `✔️ ${task.title}`;
-        tasksContainer.appendChild(taskDiv);
+        const card = document.createElement("div");
+        card.className = "card small";
+        card.innerHTML = `
+          <h3>${task.title}</h3>
+          <p>${task.description || ""}</p>
+          <p><strong>Fecha:</strong> ${task.dueDate ? formatDate(task.dueDate) : "Sin fecha"}</p>
+          <p><strong>Estado:</strong> ${task.status || "Pendiente"}</p>
+        `;
+        tasksContainer.appendChild(card);
       });
     }
   } catch (error) {
@@ -51,3 +56,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.location.href = "login.html";
   });
 });
+
+// Formatea la fecha a DD/MM/YYYY
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("es-ES");
+}
