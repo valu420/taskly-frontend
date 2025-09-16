@@ -2,7 +2,7 @@ import { CONFIG } from "../js/config.js";
 import { updateUser } from "../services/userService.js"; // 👈 importar servicio
 
 document.addEventListener("DOMContentLoaded", () => {
-  const email = localStorage.getItem(CONFIG.STORAGE_KEYS.USER_EMAIL);
+  const email = localStorage.getItem("userEmail");
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const age = localStorage.getItem("userAge");
