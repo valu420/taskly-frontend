@@ -22,9 +22,29 @@ export const addTask = async (taskData) => {
  * Handles the task creation form submission.
  * Collects form data, validates it, and sends it to the backend.
  */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("taskForm");
   if (!form) return;
+
+  // --- NUEVO: Cargar datos si es edición ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const taskId = urlParams.get("id");
+  if (taskId) {
+    try {
+      // Obtener tarea por ID
+      const res = await http.get(`/tasks/${taskId}`);
+      const task = res.data;
+      document.getElementById("titulo").value = task.title || "";
+      document.getElementById("descripcion").value = task.description || "";
+      document.getElementById("status").value = task.status || "pending";
+      document.getElementById("date").value = task.date || "";
+      document.getElementById("hour").value = task.hour || "";
+      document.getElementById("completed").checked = !!task.completed;
+    } catch (error) {
+      console.error("Error cargando tarea:", error);
+      alert("No se pudo cargar la tarea para editar.");
+    }
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();

@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configuración de Perfil - Taskly</title>
   <link rel="stylesheet" href="../styles/styles.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -109,10 +114,12 @@
   document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.getElementById("editProfileBtn");
     const form = document.getElementById("updateForm");
-    editBtn.addEventListener("click", () => {
-      form.classList.remove("hidden");
-      editBtn.style.display = "none";
-    });
+    if (editBtn && form) {
+      editBtn.addEventListener("click", () => {
+        form.classList.remove("hidden");
+        editBtn.style.display = "none";
+      });
+    }
   });
 </script>
 <script type="module" src="../js/configuration.js"></script>
