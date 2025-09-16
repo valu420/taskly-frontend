@@ -36,20 +36,19 @@
     <!-- Main -->
     <div class="main">
       <h2 id="greeting">Hola, Usuario 👋</h2>
-      <div class="cards">
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card small"></div>
+      
+      <!-- Botón para agregar nueva tarea -->
+      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+        <a href="add-task.html" class="btn-primary">Agregar nueva tarea</a>
       </div>
-      <div id="tasksContainer">
+
+      <!-- Contenedor de tareas en tarjetas -->
+      <div id="tasksContainer" class="cards">
+        <!-- Las tareas se insertarán aquí como tarjetas -->
         <p>Cargando tareas...</p>
       </div>
     </div>
   </div>
-
-  <!-- Floating button -->
-  <div class="fab" onclick="window.location.href='add-task.html'">+</div>
 
   <script type="module" src="../js/dashboard.js"></script>
   <script>

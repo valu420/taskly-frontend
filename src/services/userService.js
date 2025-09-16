@@ -39,3 +39,15 @@ export const forgotPassword = (email) =>
  */
 export const resetPassword = (token, newPassword) =>
   http.post("/auth/reset-password", { token, newPassword });
+
+/**
+ * Updates a user's profile.
+ */
+export const updateUser = (userId, data) =>
+  http.put(`/users/${userId}`, data);
+
+/**
+ * Gets a user's profile by ID.
+ */
+export const getUserById = (userId) =>
+  http.get(`/users/${userId}`);

@@ -1100,6 +1100,172 @@ header {
   margin-top: 0.5rem;
 }
 
+/* === RESET Y BODY === */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f3f3f9;             /* fondo suave */
+  font-family: "Segoe UI", sans-serif;
+  display: flex;                   /* mantiene tu layout */
+}
+
+/* === CONTENEDOR PRINCIPAL CONFIGURACIÓN === */
+.config-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los hijos */
+  justify-content: center;
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;               /* 👈 centra dentro del espacio disponible */
+  padding: 50px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Título */
+.config-container h2 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+/* === INPUTS === */
+.config-container input {
+  width: 100%;
+  padding: 16px;
+  margin: 14px 0;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.config-container input:focus {
+  border-color: #7a2cb8;
+  outline: none;
+  box-shadow: 0 0 8px rgba(122, 44, 184, 0.4);
+}
+
+/* Agrupar input con ojito */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #7a2cb8;
+}
+
+/* === LISTA DE REQUISITOS === */
+.requirements {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  font-size: 1.05rem;
+  text-align: left;
+}
+
+.requirements li {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+}
+
+.requirements li.valid {
+  color: green;
+  font-weight: 500;
+}
+
+.requirements li.invalid {
+  color: red;
+}
+
+/* === BOTONES GENERALES === */
+.config-container button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background: #4b006e;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease-in-out;
+}
+
+.config-container button:hover {
+  background: #6e009f;
+  transform: scale(1.03);
+}
+
+/* Oculto */
+.hidden {
+  display: none;
+}
+
+/* === PERFIL === */
+.profile-box {
+  margin-bottom: 3rem;
+  padding: 3rem;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background: #f9f9ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 400px; /* Opcional: limita el ancho */
+}
+
+/* Imagen de perfil */
+.profile-box .profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Info de perfil */
+.profile-info {
+  text-align: center;
+}
+
+.profile-info p {
+  margin: 8px 0;
+  font-size: 1.2rem;
+}
+
+/* Botón dentro de profile-box */
+.profile-box button {
+  padding: 14px 22px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  background: #4b006e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease-in-out;
+}
+
+.profile-box button:hover {
+  background: #6e009f;
+  transform: scale(1.03);
+}
 /* Responsivo */
 @media (max-width: 600px) {
   .recoverPassword {
