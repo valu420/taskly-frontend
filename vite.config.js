@@ -16,7 +16,7 @@ export default defineConfig({
         register: "src/pages/register.html",
         recoverPassword: "src/pages/recoverPassword.html",
         confirmPassword: "src/pages/confirmPassword.html",
-        configuration: "src/pages/configuration.html"
+        
       }
     }
   }
