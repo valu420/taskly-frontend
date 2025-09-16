@@ -14,6 +14,7 @@ export default defineConfig({
         kanban: "src/pages/kanban.html",
         login: "src/pages/login.html",
         register: "src/pages/register.html",
+        configuration: "src/pages/configuration.html",
         recoverPassword: "src/pages/recoverPassword.html",
         confirmPassword: "src/pages/confirmPassword.html",
         
