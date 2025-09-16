@@ -1,17 +1,14 @@
-import { get } from "../api/http.js"; 
-import { getTasks } from "../services/taskService.js"; // si ya lo tienes, úsalo
+import http from "../api/http.js";
+import { getTasks } from "../services/taskService.js";
 
 /**
- * Inicializa el dashboard:
- * - Verifica autenticación
- * - Muestra info del usuario
- * - Carga tareas desde backend
- * - Maneja logout
+ * Initializes the dashboard page.
+ * Checks user authentication, displays user info, loads tasks, and handles logout.
  */
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1. Verificar autenticación
+  // Check if the user is logged in
   const email = localStorage.getItem("userEmail");
-  const name = localStorage.getItem("userName") || "Usuario";
+  const name = localStorage.getItem("userName"); //cambiar
 
   if (!email) {
     window.location.href = "login.html";
@@ -19,29 +16,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // 2. Mostrar info usuario
+    // Display the user's name in the sidebar and greeting
     document.getElementById("userName").textContent = name;
     document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
 
-    // 3. Cargar tareas
+    // Load tasks (currently from localStorage, can be replaced with backend)
     const tasksContainer = document.getElementById("tasksContainer");
-    tasksContainer.innerHTML = "<p>Cargando tareas...</p>";
+    tasksContainer.innerHTML = "";
 
-    // Puedes elegir entre servicio o llamada directa al API
-    let tasks;
-    try {
-      // Versión con servicio si lo implementaste
-      tasks = await getTasks(); 
-    } catch {
-      // Fallback directo al endpoint
-      const response = await get("tasks");
-      tasks = response.tasks || response;
-    }
+    /**
+     * @type {Array<{title: string, description?: string, dueDate?: string, status?: string}>}
+     */
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    if (!tasks || tasks.length === 0) {
+    if (tasks.length === 0) {
       tasksContainer.innerHTML = "<p>No tienes tareas pendientes.</p>";
     } else {
-      tasksContainer.innerHTML = "";
       tasks.forEach((task) => {
         const card = document.createElement("div");
         card.className = "card small";
@@ -56,19 +46,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   } catch (error) {
     console.error("Error loading dashboard:", error);
-    document.getElementById("tasksContainer").innerHTML = "<p>Error al cargar las tareas.</p>";
+    alert("An error occurred while loading the dashboard.");
   }
 
-  // 4. Logout
+  // Logout handler
   document.getElementById("logoutBtn").addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("userEmail");
-    localStorage.removeItem("userName");
     window.location.href = "login.html";
   });
 });
 
-// Utilidad: formatear fecha DD/MM/YYYY
+// Formatea la fecha a DD/MM/YYYY
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("es-ES");
