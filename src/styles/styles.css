@@ -1107,11 +1107,11 @@ header {
 
 .tasks-row {
   display: flex;
-  gap: 1rem;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  padding: 1rem 0;
+  gap: 1rem;
+  padding: 10px 0;
 }
-
 .tasks-row::-webkit-scrollbar {
   height: 8px;
 }
@@ -1125,13 +1125,16 @@ header {
   background: #555;
 }
 
+
 .task-card {
-  flex: 0 0 auto;
-  width: 250px;
-  background: #fff;
+  flex: 0 0 auto; /* No se encogen */
+  width: 220px;
+  min-height: 160px;
+  border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* === RESET Y BODY === */
