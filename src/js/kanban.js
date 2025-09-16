@@ -48,11 +48,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       taskCard.innerHTML = `
         <div class="task-header">
           <h4>${task.title}</h4>
+          <button class="edit-btn" title="Editar">✏️</button>
           <button class="delete-btn" title="Eliminar">❌</button>
         </div>
         <p>${task.description}</p>
         <small>📌 ${task.status} | 📅 ${task.date} ⏰ ${task.hour}</small>
       `;
+
+      // Edit button handler
+      taskCard.querySelector(".edit-btn").addEventListener("click", () => {
+        window.location.href = `add-task.html?id=${task._id}`;
+      });
 
       // Delete button handler
       taskCard
