@@ -1,4 +1,4 @@
-import CONFIG from "../js/configuration.js";
+import { CONFIG } from "../js/config.js";
 import { updateUser } from "../services/userService.js"; // 👈 importar servicio
 
 document.addEventListener("DOMContentLoaded", () => {
