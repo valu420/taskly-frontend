@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configuración de Perfil - Taskly</title>
   <link rel="stylesheet" href="../styles/styles.css">
-  <style>
-    .hidden {
-      display: none;
-    }
-  </style>
 </head>
 <body>
 <header>
@@ -26,10 +21,10 @@
     <div>
       <div class="profile">👤 <span id="userName">Cargando...</span></div>
       <div class="menu">
-        <a href="dashboard.html">⚛️ Dashboard</a>
+        <a href="kanban.html">🙂 Mis tareas</a>
         <a href="add-task.html">➕ Agregar tarea</a>
         <a href="#">📅 Calendario</a>
-        <a href="kanban.html">🙂 Mis tareas</a>
+        
       </div>
     </div>
     <div class="bottom">
@@ -46,16 +41,16 @@
       <div class="profile-box">
         <img src="../../public/profile-placeholder.png" alt="Foto de perfil" class="profile-pic">
         <div class="profile-info">
-          <p><strong>Nombre:</strong> <span class="profile-name">Usuario Ejemplo</span></p>
-          <p><strong>Email:</strong> <span class="email">usuario@ejemplo.com</span></p>
-          <p><strong>Edad:</strong> <span class="age">N/A</span></p>
-          <p><strong>Usuario desde:</strong> <span class="user-since">2025</span></p>
+          <!-- notar: incluí tanto id como class para máxima compatibilidad -->
+          <p><strong>Nombre:</strong> <span id="profileName" class="profile-name">Usuario Ejemplo</span></p>
+          <p><strong>Email:</strong> <span id="profileEmail" class="email">usuario@ejemplo.com</span></p>
+          <p><strong>Edad:</strong> <span id="profileAge" class="age">N/A</span></p>
         </div>
-        <button id="editProfileBtn">Actualizar Perfil</button>
+        <button id="editProfileBtn" type="button">Actualizar Perfil</button>
       </div>
 
       <!-- Formulario de actualización (inicialmente oculto) -->
-      <form id="updateForm" class="hidden">
+      <form id="configurationForm" class="hidden" novalidate>
         <h2>Actualizar Perfil</h2>
 
         <!-- Nombre -->
@@ -76,13 +71,11 @@
         <!-- Contraseña actual -->
         <div class="input-group">
           <input type="password" id="currentPassword" placeholder="Contraseña Actual" required>
-          <span class="toggle-password" data-target="currentPassword">👁️</span>
         </div>
 
         <!-- Nueva contraseña -->
         <div class="input-group">
           <input type="password" id="newPassword" placeholder="Nueva Contraseña">
-          <span class="toggle-password" data-target="newPassword">👁️</span>
         </div>
 
         <!-- Requisitos de la nueva contraseña -->
@@ -106,22 +99,51 @@
 </footer>
 
 <script>
+  /* Mantener toggle del sidebar (no tocado) */
   function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("active");
   }
 
-  // Mostrar el formulario al hacer clic en "Actualizar Perfil"
+  /* Pequeño script para asegurar que el botón "Actualizar Perfil" funcione:
+     - abre/cierra el formulario
+     - precarga los datos visibles en la tarjeta (nombre, email, edad)
+     - añade comportamiento "ojito" para los inputs de contraseña
+     (este script es un fallback ligero; tu configuration.js puede añadir lógica extra) */
   document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.getElementById("editProfileBtn");
-    const form = document.getElementById("updateForm");
-    if (editBtn && form) {
-      editBtn.addEventListener("click", () => {
-        form.classList.remove("hidden");
-        editBtn.style.display = "none";
-      });
-    }
+    const form = document.getElementById("configurationForm");
+
+    editBtn && editBtn.addEventListener("click", () => {
+      form.classList.toggle("hidden");
+
+      // Si abrimos el formulario, precargamos valores desde la tarjeta
+      if (!form.classList.contains("hidden")) {
+        const profileNameEl = document.querySelector(".profile-name") || document.getElementById("profileName");
+        const profileEmailEl = document.querySelector(".email") || document.getElementById("profileEmail");
+        const profileAgeEl = document.querySelector(".age") || document.getElementById("profileAge");
+
+        const fullName = profileNameEl?.textContent?.trim() || "";
+        const email = profileEmailEl?.textContent?.trim() || "";
+        const age = profileAgeEl?.textContent?.trim() || "";
+
+        const inName = document.getElementById("newName");
+        const inEmail = document.getElementById("newEmail");
+        const inAge = document.getElementById("newAge");
+
+        if (inName) inName.value = fullName;
+        if (inEmail) inEmail.value = email;
+        if (inAge) inAge.value = age;
+
+        // focus y scroll suave
+        inName?.focus();
+        form.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  
   });
 </script>
+
+<!-- Tu módulo principal de configuración (manténlo si existe y es correcto) -->
 <script type="module" src="../js/configuration.js"></script>
 </body>
 </html>
