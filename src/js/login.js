@@ -21,11 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await login({ email, password });
 
         // Stores JWT token and user email in localStorage
+        localStorage.setItem("userName", response.data.user.firstName);
+        localStorage.setItem("userLastName", response.data.user.lastName);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userEmail", email);
 
-        // Redirects to dashboard
-        window.location.href = "dashboard.html";
+        // Redirects to kanban
+        window.location.href = "kanban.html";
       } catch (error) {
         console.error("Login error:", error);
         alert("Invalid credentials. Please try again.");

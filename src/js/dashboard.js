@@ -1,14 +1,13 @@
-import http from "../api/http.js";
 import { getTasks } from "../services/taskService.js";
 
 /**
- * Initializes the dashboard page.
- * Checks user authentication, displays user info, loads tasks, and handles logout.
+ * Inicializa la página del Dashboard.
+ * Verifica autenticación, muestra usuario, carga tareas y maneja logout.
  */
 document.addEventListener("DOMContentLoaded", async () => {
-  // Check if the user is logged in
+  // Verificar si el usuario está logueado
   const email = localStorage.getItem("userEmail");
-  const name = localStorage.getItem("userName"); //cambiar
+  const name = localStorage.getItem("userName");
 
   if (!email) {
     window.location.href = "login.html";
@@ -16,38 +15,49 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // Display the user's name in the sidebar and greeting
-    document.getElementById("userName").textContent = name;
-    document.getElementById("greeting").textContent = `Hola, ${name} 👋`;
+    // Mostrar datos del usuario en sidebar y saludo
+    document.getElementById("userName").textContent = name || "Usuario";
+    document.getElementById("greeting").textContent = `Hola, ${name || "Usuario"} 👋`;
 
-    // Load tasks (currently from localStorage, can be replaced with backend)
+    // Contenedor de tareas
     const tasksContainer = document.getElementById("tasksContainer");
-    tasksContainer.innerHTML = "";
+    tasksContainer.innerHTML = "<p>Cargando tareas...</p>";
 
-    /**
-     * @type {Array<{title: string}>}
-     */
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    // 🚀 Cargar tareas desde el backend
+    const tasks = await getTasks();
 
-    if (tasks.length === 0) {
-      tasksContainer.innerHTML = "<p>No tienes tareas pendientes.</p>";
+    if (!tasks || tasks.length === 0) {
+      tasksContainer.innerHTML = "<p>No tienes tareas creadas aún.</p>";
     } else {
+      tasksContainer.innerHTML = "";
+
       tasks.forEach((task) => {
-        const taskDiv = document.createElement("div");
-        taskDiv.classList.add("task");
-        taskDiv.textContent = `✔️ ${task.title}`;
-        tasksContainer.appendChild(taskDiv);
+        const card = document.createElement("div");
+        card.className = "task-card";
+        card.innerHTML = `
+          <h4>${task.title}</h4>
+          <p>${task.description || ""}</p>
+          <p><strong>Fecha:</strong> ${task.dueDate ? formatDate(task.dueDate) : "Sin fecha"}</p>
+          <p><strong>Estado:</strong> ${task.status || "Pendiente"}</p>
+        `;
+        tasksContainer.appendChild(card);
       });
     }
   } catch (error) {
-    console.error("Error loading dashboard:", error);
-    alert("An error occurred while loading the dashboard.");
+    console.error("Error al cargar el dashboard:", error);
+    alert("❌ Error cargando el dashboard.");
   }
 
-  // Logout handler
+  // Logout
   document.getElementById("logoutBtn").addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.removeItem("userEmail");
+    localStorage.clear();
     window.location.href = "login.html";
   });
 });
+
+// Formatear fecha a DD/MM/YYYY
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("es-ES");
+}
