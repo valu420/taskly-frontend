@@ -49,6 +49,18 @@ header {
   padding-left: 0;
 }
 
+header .header-btn {
+  margin-left: auto;
+  
+  padding: 0.7rem 1.6rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
 header .logo {
   display: flex;
   align-items: center;
@@ -72,17 +84,19 @@ header .logo h1 {
 button,
 a.btn-primary,
 a.btn-secondary {
-  padding: 0.9rem 0rem;
+  padding: 0.7rem 1.6rem;
   width: 100%;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #fff;
   text-decoration: none;
   display: inline-block;
   transition: background 0.3s ease;
   margin-top: 0.5rem;
+  min-width: 120px;
+  max-width: 220px;
 }
 
 /* Botón principal */
