@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("userLastName", response.data.user.lastName);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userEmail", email);
+        localStorage.setItem("userId", response.data.user._id);
 
         // Redirects to kanban
         window.location.href = "kanban.html";

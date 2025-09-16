@@ -8,7 +8,8 @@ const routes = {
   '/kanban': 'src/views/kanban.html',
   '/recover-password': 'src/views/recoverPassword.html',
   '/confirm-password': 'src/views/confirmPassword.html',
-  '/profile-view': 'src/views/profile-view.html',
+  '/configuration': 'src/views/configuration.html',
+  
 };
 
 // Navega a una ruta específica
