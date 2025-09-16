@@ -3,28 +3,66 @@ import http from "../api/http.js";
 /**
  * Creates a new task by sending a POST request to the backend.
  * @param {Object} taskData - Task data.
- * @param {string} taskData.title - Task title.
- * @param {string} taskData.description - Task description.
- * @param {string} taskData.status - Task status.
- * @param {string} taskData.date - Task date.
- * @param {string} taskData.hour - Task hour.
- * @param {boolean} taskData.completed - Task completion state.
  * @returns {Promise<Object>} Promise resolving to the created task.
  */
 export const addTask = async (taskData) => {
   const response = await http.post("/tasks", taskData);
-  return response.data; // axios returns {data, status, ...}
+  return response.data;
 };
 
-// --- FORM CONNECTION ---
-
-/**
- * Handles the task creation form submission.
- * Collects form data, validates it, and sends it to the backend.
- */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("taskForm");
   if (!form) return;
+
+  // --- NUEVO: Botón para cargar tarea por ID manualmente ---
+  const loadTaskBtn = document.getElementById("loadTaskBtn");
+  const taskIdInput = document.getElementById("taskIdInput");
+
+  let currentTaskId = null;
+
+  if (loadTaskBtn && taskIdInput) {
+    loadTaskBtn.addEventListener("click", async () => {
+      const inputTaskId = taskIdInput.value.trim();
+      if (!inputTaskId) {
+        alert("Ingresa un ID de tarea válido.");
+        return;
+      }
+      try {
+        const res = await http.get(`/tasks/${inputTaskId}`);
+        const task = res.data;
+        document.getElementById("titulo").value = task.title || "";
+        document.getElementById("descripcion").value = task.description || "";
+        document.getElementById("status").value = task.status || "pending";
+        document.getElementById("date").value = task.date || "";
+        document.getElementById("hour").value = task.hour || "";
+        document.getElementById("completed").checked = !!task.completed;
+        currentTaskId = inputTaskId;
+        alert("Tarea cargada. Puedes editar y guardar los cambios.");
+      } catch (error) {
+        alert("No se pudo cargar la tarea. Verifica el ID.");
+      }
+    });
+  }
+
+  // --- Cargar datos si es edición por parámetro en la URL ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const taskId = urlParams.get("id");
+  if (taskId) {
+    try {
+      const res = await http.get(`/tasks/${taskId}`);
+      const task = res.data;
+      document.getElementById("titulo").value = task.title || "";
+      document.getElementById("descripcion").value = task.description || "";
+      document.getElementById("status").value = task.status || "pending";
+      document.getElementById("date").value = task.date || "";
+      document.getElementById("hour").value = task.hour || "";
+      document.getElementById("completed").checked = !!task.completed;
+      currentTaskId = taskId;
+    } catch (error) {
+      console.error("Error cargando tarea:", error);
+      alert("No se pudo cargar la tarea para editar.");
+    }
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -43,25 +81,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      await addTask({
-        title,
-        description,
-        status,
-        date,
-        hour,
-        completed
-      });
-      alert("Task created successfully.");
-      form.reset();
+      if (currentTaskId) {
+        // Edit existing task
+        await http.put(`/tasks/${currentTaskId}`, {
+          title,
+          description,
+          status,
+          date,
+          hour,
+          completed
+        });
+        alert("Task updated successfully.");
+      } else {
+        // Create new task
+        await addTask({
+          title,
+          description,
+          status,
+          date,
+          hour,
+          completed
+        });
+        alert("Task created successfully.");
+        form.reset();
+      }
     } catch (error) {
-      console.error("Error creating task:", error);
-      alert("Could not create the task. Please try again.");
+      console.error("Error saving task:", error);
+      alert("Could not save the task. Please try again.");
     }
   });
 
-  document.getElementById("logoutBtn").addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.removeItem("userEmail");
-    window.location.href = "login.html";
-  });
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("userEmail");
+      window.location.href = "login.html";
+    });
+  }
 });
