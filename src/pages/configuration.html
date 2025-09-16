@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración de Perfil - Taskly</title>
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<header>
+  <div class="hamburger" onclick="toggleSidebar()">☰</div>
+  <div class="logo">
+    <img src="../../public/favicon.png" alt="Logo Taskly">
+    <h1>Taskly</h1>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div>
+      <div class="profile">👤 <span id="userName">Cargando...</span></div>
+      <div class="menu">
+        <a href="dashboard.html">⚛️ Dashboard</a>
+        <a href="add-task.html">➕ Agregar tarea</a>
+        <a href="#">📅 Calendario</a>
+        <a href="kanban.html">🙂 Mis tareas</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <a href="#">⚙️ Configuración</a>
+      <a href="#" id="logoutBtn">↩️ Cerrar Sesión</a>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="configuration-page">
+    <section class="config-container">
+
+      <!-- Caja con datos del usuario -->
+      <div class="profile-box">
+        <img src="../../public/profile-placeholder.png" alt="Foto de perfil" class="profile-pic">
+        <div class="profile-info">
+          <p><strong>Nombre:</strong> <span class="profile-name">Usuario Ejemplo</span></p>
+          <p><strong>Email:</strong> <span class="email">usuario@ejemplo.com</span></p>
+          <p><strong>Edad:</strong> <span class="age">N/A</span></p>
+          <p><strong>Usuario desde:</strong> <span class="user-since">2025</span></p>
+        </div>
+        <button id="editProfileBtn">Actualizar Perfil</button>
+      </div>
+
+      <!-- Formulario de actualización (inicialmente oculto) -->
+      <form id="updateForm" class="hidden">
+        <h2>Actualizar Perfil</h2>
+
+        <!-- Nombre -->
+        <div class="input-group">
+          <input type="text" id="newName" placeholder="Nombre Completo" required>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <input type="email" id="newEmail" placeholder="Email" required>
+        </div>
+
+        <!-- Edad -->
+        <div class="input-group">
+          <input type="number" id="newAge" placeholder="Edad" min="0">
+        </div>
+
+        <!-- Contraseña actual -->
+        <div class="input-group">
+          <input type="password" id="currentPassword" placeholder="Contraseña Actual" required>
+          <span class="toggle-password" data-target="currentPassword">👁️</span>
+        </div>
+
+        <!-- Nueva contraseña -->
+        <div class="input-group">
+          <input type="password" id="newPassword" placeholder="Nueva Contraseña">
+          <span class="toggle-password" data-target="newPassword">👁️</span>
+        </div>
+
+        <!-- Requisitos de la nueva contraseña -->
+        <ul id="passwordRequirements" class="requirements">
+          <li id="req-length" class="invalid">❌ Mínimo 8 caracteres</li>
+          <li id="req-upper" class="invalid">❌ Una letra mayúscula</li>
+          <li id="req-lower" class="invalid">❌ Una letra minúscula</li>
+          <li id="req-number" class="invalid">❌ Un número</li>
+          <li id="req-special" class="invalid">❌ Un carácter especial (!@#$%^&*)</li>
+        </ul>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
+
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>© 2025 - Taskly</p>
+</footer>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+  }
+
+  // Mostrar el formulario al hacer clic en "Actualizar Perfil"
+  document.addEventListener("DOMContentLoaded", () => {
+    const editBtn = document.getElementById("editProfileBtn");
+    const form = document.getElementById("updateForm");
+    editBtn.addEventListener("click", () => {
+      form.classList.remove("hidden");
+      editBtn.style.display = "none";
+    });
+  });
+</script>
+<script type="module" src="../js/configuration.js"></script>
+</body>
+</html>
