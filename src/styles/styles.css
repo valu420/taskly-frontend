@@ -872,6 +872,12 @@ footer {
   padding-bottom: 0.5rem;
 }
 
+.kanban-btn-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 /* Kanban Items */
 .kanban-item {
   background: #fff;
@@ -940,9 +946,24 @@ footer {
   padding: 0 0.2rem;
 }
 
+
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: #e0e7ff;
+}
+
 .delete-btn:hover {
-  color: #e74c3c;
-  transform: scale(1.2);
+  background: #fee2e2;
 }
 
 .task-card {
@@ -960,6 +981,11 @@ footer {
 
 .task-card:last-child {
   margin-bottom: 0;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px; /* Espacio entre botones */
 }
 
 @media (max-width: 1100px) {
