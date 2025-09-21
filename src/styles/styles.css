@@ -931,12 +931,11 @@ footer {
 }
 
 .task-header {
-  display: column-reverse;
-  justify-content: flex-end;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 0.5rem;
-  flex-wrap: nowrap;
-  flex-direction: column-reverse;
+  margin-bottom: 0.3rem;
 
 }
 
@@ -963,17 +962,21 @@ footer {
 
 .edit-btn, .delete-btn {
   background: #fff;
-  border: 2px solid #dbafff;
+  border: 2px solid #e1e1e1;
   color: #fc6874;
   cursor: pointer;
-  font-size: 1.2em;
-  padding: 4px 8px;
+  font-size: 1.1em;
+  padding: 2px 7px;
   border-radius: 6px;
   transition: background 0.2s, border-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 4px #0001;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 40px;
+  max-height: 40px;
 }
 
 .edit-btn:hover {
@@ -1003,7 +1006,7 @@ footer {
 
 .task-actions {
   display: flex;
-  gap: 10px; /* Espacio entre botones */
+  gap: 6px; /* Espacio entre botones */
   align-items: flex-start;
 }
 
