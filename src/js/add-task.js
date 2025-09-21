@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await http.get(`/tasks/${taskId}`);
       console.log("Respuesta de la tarea:", res.data);
-      const task = res.data;
+      const task = res.data.task;
       document.getElementById("titulo").value = task.title || "";
       document.getElementById("descripcion").value = task.description || "";
       document.getElementById("status").value = task.status || "pending";
