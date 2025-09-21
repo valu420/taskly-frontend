@@ -12,6 +12,8 @@ export const addTask = async (taskData) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("taskForm");
+  const formTitle = document.getElementById("formTitle");
+  const submitBtn = document.getElementById("submitBtn");
   if (!form) return;
 
   // --- NUEVO: Botón para cargar tarea por ID manualmente ---
@@ -50,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (taskId) {
     try {
       const res = await http.get(`/tasks/${taskId}`);
+      console.log("Respuesta de la tarea:", res.data);
       const task = res.data;
       document.getElementById("titulo").value = task.title || "";
       document.getElementById("descripcion").value = task.description || "";
@@ -58,6 +61,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("hour").value = task.hour || "";
       document.getElementById("completed").checked = !!task.completed;
       currentTaskId = taskId;
+      if (formTitle) formTitle.textContent = "Editar tarea";
+      if (submitBtn) submitBtn.textContent = "Editar tarea";
     } catch (error) {
       console.error("Error cargando tarea:", error);
       alert("No se pudo cargar la tarea para editar.");
