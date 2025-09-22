@@ -207,6 +207,77 @@ a.btn-secondary:hover {
   color: var(--color-btn-primary);
 }
 
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilo para sección "Sobre Nosotros" */
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background: #f4f3f6;
+  border-top: 2px solid #eee;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #301148;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* Equipo */
+.team {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  margin-top: 1,5rem;
+}
+
+.team-member {
+  background: #dbd9dd;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(152, 42, 128, 0.558);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member h4 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+.team-member p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Imagen */
+.about-img img {
+  width: 300px;
+  max-width: 100%;
+  border-radius: 20px;
+}
+
 /* ==============================
    Footer
    ============================== */

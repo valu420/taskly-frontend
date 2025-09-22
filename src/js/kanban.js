@@ -48,8 +48,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       taskCard.innerHTML = `
         <div class="task-header">
           <h4>${task.title}</h4>
+          <div class="task-actions">
           <button class="edit-btn" title="Editar">✏️</button>
           <button class="delete-btn" title="Eliminar">❌</button>
+        </div>
         </div>
         <p>${task.description}</p>
         <small>📌 ${task.status} | 📅 ${task.date} ⏰ ${task.hour}</small>
