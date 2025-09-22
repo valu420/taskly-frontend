@@ -221,6 +221,77 @@ a.btn-secondary:hover {
   color: var(--color-btn-primary);
 }
 
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilo para sección "Sobre Nosotros" */
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background: #f4f3f6;
+  border-top: 2px solid #eee;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #301148;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* Equipo */
+.team {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  margin-top: 1,5rem;
+}
+
+.team-member {
+  background: #dbd9dd;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(152, 42, 128, 0.558);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member h4 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+.team-member p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Imagen */
+.about-img img {
+  width: 300px;
+  max-width: 100%;
+  border-radius: 20px;
+}
+
 /* ==============================
    Footer
    ============================== */
@@ -230,6 +301,47 @@ footer {
   background-color: var(--color-header);
   margin-top: 2rem;
   flex-shrink: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  margin: 0.5rem 0;
+}
+
+.modal-content a {
+  text-decoration: none;
+  color: #333;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 /* ==============================
@@ -1383,4 +1495,141 @@ body {
 .config-container {
   margin: 0; /* Elimina margen superior */
   /* padding ya está definido */
+}
+
+/* ==========================
+   Sitemap Styles
+-----------------------------
+
+   /* Mini navegación superior */
+.sitemap-nav {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.sitemap-nav ul {
+  display: inline-flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.sitemap-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #4a90e2;
+  transition: color 0.3s ease;
+}
+
+.sitemap-nav a:hover {
+  color: #2c3e50;
+  text-decoration: underline;
+}  
+
+   .sitemap-page {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.sitemap-page h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #43054d;
+}
+
+.sitemap-page p {
+  color: #000000;
+  margin-bottom: 2rem;
+}
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.sitemap-card {
+  background: #efe9f0;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 8px rgba(159, 74, 215, 0.505);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sitemap-card i {
+  margin-bottom: 1rem;
+  color: #4CAF50;
+}
+
+.sitemap-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.sitemap-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.sitemap-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* ==========================
+   Responsiveness
+   ========================== */
+
+/* Tablets (pantallas medianas) */
+@media (max-width: 768px) {
+  .sitemap-page {
+    padding: 2rem 1rem;
+  }
+
+  .sitemap-page h2 {
+    font-size: 1.8rem;
+  }
+
+  .sitemap-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .sitemap-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Móviles (pantallas pequeñas) */
+@media (max-width: 480px) {
+  .sitemap-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .sitemap-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .sitemap-page p {
+    font-size: 0.9rem;
+  }
+
+  .sitemap-card {
+    padding: 1.2rem;
+  }
+
+  .sitemap-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .sitemap-card p {
+    font-size: 0.85rem;
+  }
 }
