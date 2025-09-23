@@ -33,7 +33,11 @@ form.addEventListener("submit", async (e) => {
 
   try {
     // Envía el token y la nueva contraseña al backend
-    await http.post("/auth/reset-password", { token, password: newPassword });
+    await fetch("https://mini-proyecto1-backend.onrender.com/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password: newPassword }),
+      });
 
     alert("✅ Tu contraseña ha sido cambiada exitosamente.");
     form.reset();
@@ -42,6 +46,10 @@ form.addEventListener("submit", async (e) => {
     window.location.href = "login.html";
   } catch (error) {
     console.error("Error changing password:", error);
+  if (error.response && error.response.data && error.response.data.error) {
+    alert("❌ " + error.response.data.error);
+  } else {
     alert("❌ No se pudo cambiar la contraseña. Intenta de nuevo.");
+  }
   }
 });
