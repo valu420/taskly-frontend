@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           completed
         });
         alert("Task updated successfully.");
+        window.location.href = "kanban.html";
       } else {
         // Create new task
         await addTask({
