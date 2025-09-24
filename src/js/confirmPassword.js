@@ -31,18 +31,22 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const response = await fetch("https://mini-proyecto1-backend.onrender.com/auth/reset-password", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ token, password: newPassword }),
-  });
-  const data = await response.json();
-  console.log(data); // <-- Muestra la respuesta real
+  try {
+    const response = await fetch("https://mini-proyecto1-backend.onrender.com/auth/reset-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, newPassword }),
+    });
+    const data = await response.json();
+    console.log(data);
 
-  if (response.ok && data.success) {
-  alert("✅ Tu contraseña ha sido cambiada exitosamente.");
-  window.location.href = "login.html";
-  } else {
-  alert("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
+    if (response.ok && data.message) {
+      alert("✅ " + data.message);
+      window.location.href = "login.html";
+    } else {
+      alert("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
+    }
+  } catch (error) {
+    alert("❌ Error de red o servidor.");
   }
 });
