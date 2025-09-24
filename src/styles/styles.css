@@ -43,7 +43,7 @@ header {
   background-color: var(--color-header);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: left;
   position: relative;
   padding: 1rem 2rem;
   padding-left: 0;
@@ -59,6 +59,20 @@ header .header-btn {
   color: #fff;
   border: none;
   cursor: pointer;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1.2rem; /* Espacio entre botones */
+  margin-left: auto;
+}
+
+.header-buttons .btn-primary,
+.header-buttons .btn-secondary {
+  width: auto;
+  min-width: 120px;
+  max-width: 220px;
+  margin-top: 0;
 }
 
 header .logo {
@@ -77,6 +91,8 @@ header .logo h1 {
   font-weight: bold;
   color: var(--color-btn-primary);
 }
+
+
 
 /* ==============================
    Botones globales
@@ -97,6 +113,7 @@ a.btn-secondary {
   margin-top: 0.5rem;
   min-width: 120px;
   max-width: 220px;
+  text-align: center;
 }
 
 /* Botón principal */
@@ -1331,17 +1348,18 @@ body {
 /* === CONTENEDOR PRINCIPAL CONFIGURACIÓN === */
 .config-container {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra horizontalmente los hijos */
+  flex-direction: row;
+  align-items: flex-start; /* Centra horizontalmente los hijos */
   justify-content: center;
-  width: 90%;
-  max-width: 700px;
-  margin: 40px auto;               /* 👈 centra dentro del espacio disponible */
+  gap: 2.5rem;
+  
+  max-width: 900px;
+  margin: 0 auto;               /* 👈 centra dentro del espacio disponible */
   padding: 50px;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  text-align: center;
+  
 }
 
 /* Título */
@@ -1436,8 +1454,9 @@ body {
 
 /* === PERFIL === */
 .profile-box {
-  margin-bottom: 3rem;
-  padding: 3rem;
+  margin-bottom: 0;
+  margin: 0 auto;
+  padding: 2rem;
   border: 1px solid #ddd;
   border-radius: 15px;
   background: #f9f9ff;
@@ -1448,7 +1467,21 @@ body {
   gap: 2rem;
   font-size: 1.2rem;
   width: 100%;
-  max-width: 400px; /* Opcional: limita el ancho */
+  max-width: 340px; /* Opcional: limita el ancho */
+}
+
+#configurationForm {
+  min-width: 320px;
+  max-width: 400px;
+  margin: 0;
+  padding: 2rem;
+  box-shadow: 0 2px 8px #0001;
+  border-radius: 12px;
+  background: #f9f9ff;
+}
+
+#configurationForm.hidden {
+  display: none;
 }
 
 /* Imagen de perfil */
@@ -1494,15 +1527,31 @@ body {
 }
 
 .configuration-page {
+
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
+  background:transparent
 }
 
 .config-container {
   margin: 0; /* Elimina margen superior */
   /* padding ya está definido */
+}
+
+@media (max-width: 900px) {
+  .config-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+  .profile-box, #configurationForm {
+    max-width: 95vw;
+    padding: 1rem;
+  }
 }
 
 /* ==========================
