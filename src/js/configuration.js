@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Obtener datos frescos del backend ---
   try {
     const res = await getUserById(userId);
-    const user = res.data;
+    // Cambia aquí: si el backend responde { user: {...} }
+    const user = res.data.user || res.data;
 
     // Mostrar datos en la tarjeta
     profileNameEl.textContent = `${user.firstName} ${user.lastName}`;
