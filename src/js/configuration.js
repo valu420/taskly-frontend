@@ -1,10 +1,10 @@
 import { getUserProfile, updateUser, deleteUser } from "../services/userService.js";
 
 // referencias al DOM
-const firstNameInput = document.getElementById("firstName");
+const firstNameInput = document.getElementById("profileName");
 const lastNameInput = document.getElementById("lastName");
-const ageInput = document.getElementById("age");
-const emailInput = document.getElementById("email");
+const ageInput = document.getElementById("profileAge");
+const emailInput = document.getElementById("profileEmail");
 const saveButton = document.getElementById("saveProfile");
 const deleteButton = document.getElementById("deleteAccount");
 
@@ -14,7 +14,7 @@ async function loadUserProfile() {
     const response = await getUserProfile();
     const user = response.data;
 
-    firstNameInput.value = user.firstName || "";
+    firstNameInput.value = user.profileName || "";
     lastNameInput.value = user.lastName || "";
     ageInput.value = user.age || "";
     emailInput.value = user.email || "";
