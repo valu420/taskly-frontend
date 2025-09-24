@@ -43,6 +43,6 @@ form.addEventListener("submit", async (e) => {
   alert("✅ Tu contraseña ha sido cambiada exitosamente.");
   window.location.href = "login.html";
   } else {
-  alert("❌ " + (data.error || "No se pudo cambiar la contraseña."));
+  alert("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
   }
 });
