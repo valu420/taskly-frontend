@@ -55,4 +55,5 @@ export const updateUser = (userId, data) =>
  * @returns {Promise<Object>} Promise resolving to the user data.
  */
 export const getUserById = (userId) =>
+  console.log("Respuesta completa del backend:", res);
   http.get(`/users/${userId}`);
