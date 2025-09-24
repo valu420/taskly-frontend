@@ -42,17 +42,12 @@ export const resetPassword = (token, newPassword) =>
 
 /**
  * Updates a user's profile.
- * @param {string} userId - User ID.
- * @param {Object} data - Data to update.
- * @returns {Promise<Object>} Promise resolving to the updated user.
  */
 export const updateUser = (userId, data) =>
   http.put(`/users/${userId}`, data);
 
 /**
  * Gets a user's profile by ID.
- * @param {string} userId - User ID.
- * @returns {Promise<Object>} Promise resolving to the user data.
  */
 export const getUserById = (userId) =>
   http.get(`/users/${userId}`);
