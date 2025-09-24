@@ -18,6 +18,7 @@ export const login = (credentials) =>
  * @param {number} data.age - User age.
  * @param {string} data.email - User email.
  * @param {string} data.password - User password.
+ * @param {string} [data.confirmPassword] - Password confirmation.
  * @returns {Promise<Object>} Promise resolving to the registration response.
  */
 export const register = (data) =>
@@ -42,12 +43,23 @@ export const resetPassword = (token, newPassword) =>
 
 /**
  * Updates a user's profile.
+ * @param {string} userId - User ID.
+ * @param {Object} data - Profile update data.
+ * @param {string} [data.firstName] - Updated first name.
+ * @param {string} [data.lastName] - Updated last name.
+ * @param {string} [data.email] - Updated email.
+ * @param {number} [data.age] - Updated age.
+ * @param {string} [data.currentPassword] - Current password (required for updates).
+ * @param {string} [data.newPassword] - New password (optional).
+ * @returns {Promise<Object>} Promise resolving to the update response.
  */
 export const updateUser = (userId, data) =>
   http.put(`/users/${userId}`, data);
 
 /**
  * Gets a user's profile by ID.
+ * @param {string} userId - User ID.
+ * @returns {Promise<Object>} Promise resolving to the user profile.
  */
 export const getUserById = (userId) =>
   http.get(`/users/${userId}`);
