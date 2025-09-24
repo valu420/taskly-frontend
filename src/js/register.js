@@ -1,5 +1,5 @@
 import { register } from "../services/userService.js";
-
+import { showToast } from "./toast.js";
 /**
  * Initializes the registration form event listener on DOMContentLoaded.
  * Handles user registration, validates passwords, and redirects to login on success.
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Validate password confirmation
       if (password !== confirmPassword) {
-        alert("Passwords do not match");
+        alert("Las Contraseñas no coinciden");
         return;
       }
 
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
           confirmPassword
         });
 
-        alert("Registration successful 🎉 You can now log in.");
+        showToast("Registro Exitoso 🎉");
         window.location.href = "login.html";
       } catch (error) {
         console.error("Registration error:", error);
-        alert("Registration failed. Please try again.");
+        showToast("Error en el registro. Intenta de nuevo.");
       }
     });
   }

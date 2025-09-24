@@ -1,5 +1,5 @@
 import http from "../api/http.js";
-
+import { showToast } from "./toast.js";
 /**
  * Creates a new task by sending a POST request to the backend.
  * @param {Object} taskData - Task data.
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (submitBtn) submitBtn.textContent = "Editar tarea";
     } catch (error) {
       console.error("Error cargando tarea:", error);
-      alert("No se pudo cargar la tarea para editar.");
+      showToast("No se pudo cargar la tarea para editar.");
     }
   }
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Basic validation
     if (!title || !date || !hour) {
-      alert("Please complete all required fields.");
+      showToast("Por favor completa todos los campos.");
       return;
     }
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           hour,
           completed
         });
-        alert("Task updated successfully.");
+        showToast("Tarea actualizada con éxito.");
         window.location.href = "kanban.html";
       } else {
         // Create new task
@@ -108,12 +108,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           hour,
           completed
         });
-        alert("Task created successfully.");
+        showToast("Tarea creada con éxito.");
         form.reset();
       }
     } catch (error) {
       console.error("Error saving task:", error);
-      alert("Could not save the task. Please try again.");
+      showToast("No se pudo guardar la tarea. Intenta de nuevo.");
     }
   });
 
