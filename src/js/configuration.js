@@ -16,8 +16,8 @@ async function loadUserProfile() {
 
     firstNameInput.value = user.profileName || "";
     lastNameInput.value = user.lastName || "";
-    ageInput.value = user.age || "";
-    emailInput.value = user.email || "";
+    ageInput.value = user.profileAge || "";
+    emailInput.value = user.profileEmail || "";
   } catch (error) {
     console.error("Error cargando perfil:", error);
     alert("No se pudo cargar el perfil, intenta iniciar sesión de nuevo.");
