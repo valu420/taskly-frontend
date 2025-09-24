@@ -9,6 +9,7 @@ const resend = document.getElementById("resend");
 async function sendRecoverEmail(email) {
   try {
     const res = await http.post("/auth/forgot-password", { email });
+    console.log(res.data);
     if (res.data.success) {
       alert("📧 " + res.data.message);
     } else {
