@@ -9,6 +9,7 @@ const routes = {
   '/recover-password': 'src/views/recoverPassword.html',
   '/confirm-password': 'src/views/confirmPassword.html',
   '/configuration': 'src/views/configuration.html',
+  '/sitemap': 'src/views/sitemap.html',
   
 };
 
