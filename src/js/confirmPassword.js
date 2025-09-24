@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e) => {
     alert("❌ Token de recuperación no encontrado.");
     return;
   }
-  onsole.log("Token:", token, "NewPassword:", newPassword);
+  console.log("Token:", token, "NewPassword:", newPassword);
   try {
     const response = await fetch("https://mini-proyecto1-backend.onrender.com/auth/reset-password", {
       method: "POST",
