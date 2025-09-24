@@ -1,109 +1,59 @@
-import { getUserById, updateUser } from "../services/userService.js";
+import { getUserProfile, updateUser, deleteUser } from "../services/userService.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
+// referencias al DOM
+const firstNameInput = document.getElementById("firstName");
+const lastNameInput = document.getElementById("lastName");
+const ageInput = document.getElementById("age");
+const emailInput = document.getElementById("email");
+const saveButton = document.getElementById("saveProfile");
+const deleteButton = document.getElementById("deleteAccount");
 
-  // Si no hay sesión -> redirige a login
-  if (!userId || !token) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  // Elementos del DOM
-  const profileNameEl = document.getElementById("profileName");
-  const profileEmailEl = document.getElementById("profileEmail");
-  const profileAgeEl = document.getElementById("profileAge");
-  const userNameSidebar = document.getElementById("userName");
-
-  const editBtn = document.getElementById("editProfileBtn");
-  const configForm = document.getElementById("configurationForm");
-
-  // --- Obtener datos frescos del backend ---
+// cargar perfil al abrir la página
+async function loadUserProfile() {
   try {
-    const res = await getUserById(userId);
-    // Cambia aquí: si el backend responde { user: {...} }
-    const user = res.data.user || res.data;
+    const response = await getUserProfile();
+    const user = response.data;
 
-    // Mostrar datos en la tarjeta
-    profileNameEl.textContent = `${user.firstName} ${user.lastName}`;
-    profileEmailEl.textContent = user.email;
-    profileAgeEl.textContent = user.age || "N/A";
-
-    // Mostrar nombre en el sidebar
-    userNameSidebar.textContent = user.firstName;
-
-    // Precargar formulario
-    document.getElementById("newName").value = `${user.firstName} ${user.lastName}`;
-    document.getElementById("newEmail").value = user.email;
-    document.getElementById("newAge").value = user.age || "";
-
+    firstNameInput.value = user.firstName || "";
+    lastNameInput.value = user.lastName || "";
+    ageInput.value = user.age || "";
+    emailInput.value = user.email || "";
   } catch (error) {
-    console.error("Error obteniendo datos del usuario:", error);
-    alert("❌ No se pudieron cargar los datos del perfil");
+    console.error("Error cargando perfil:", error);
+    alert("No se pudo cargar el perfil, intenta iniciar sesión de nuevo.");
   }
+}
 
-  // --- Mostrar/ocultar formulario ---
-  editBtn.addEventListener("click", () => {
-    configForm.classList.toggle("hidden");
-    if (!configForm.classList.contains("hidden")) {
-      configForm.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  });
+// guardar cambios
+saveButton.addEventListener("click", async () => {
+  try {
+    const updated = {
+      firstName: firstNameInput.value,
+      lastName: lastNameInput.value,
+      age: ageInput.value,
+    };
 
-  // --- Guardar cambios ---
-  configForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const newName = document.getElementById("newName").value.trim();
-    const newEmail = document.getElementById("newEmail").value.trim();
-    const newAge = document.getElementById("newAge").value.trim();
-    const currentPassword = document.getElementById("currentPassword").value.trim();
-    const newPassword = document.getElementById("newPassword").value.trim();
-
-    if (!currentPassword) {
-      alert("⚠️ Debes ingresar tu contraseña actual para confirmar cambios.");
-      return;
-    }
-
-    // separar nombre y apellidos
-    const [firstNameUpdate, ...lastNameParts] = newName.split(" ");
-    const lastNameUpdate = lastNameParts.join(" ") || "";
-
-    try {
-      const res = await updateUser(userId, {
-        firstName: firstNameUpdate,
-        lastName: lastNameUpdate,
-        email: newEmail,
-        age: Number(newAge),
-        currentPassword,
-        newPassword: newPassword || undefined,
-      });
-
-      const updatedUser = res.data;
-
-      // Actualizar vista
-      profileNameEl.textContent = `${updatedUser.firstName} ${updatedUser.lastName}`;
-      profileEmailEl.textContent = updatedUser.email;
-      profileAgeEl.textContent = updatedUser.age || "N/A";
-      userNameSidebar.textContent = updatedUser.firstName;
-
-      alert("✅ Cambios guardados correctamente");
-      configForm.classList.add("hidden");
-
-    } catch (error) {
-      console.error("Error actualizando perfil:", error);
-      alert("❌ No se pudo actualizar el perfil");
-    }
-  });
-
-  // --- Logout ---
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.clear();
-      window.location.href = "login.html";
-    });
+    await updateUser(updated);
+    alert("Perfil actualizado con éxito ✅");
+  } catch (error) {
+    console.error("Error actualizando perfil:", error);
+    alert("No se pudo actualizar el perfil.");
   }
 });
+
+// borrar cuenta
+deleteButton.addEventListener("click", async () => {
+  if (confirm("¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
+    try {
+      await deleteUser();
+      localStorage.removeItem("token");
+      window.location.href = "/pages/login.html";
+    } catch (error) {
+      console.error("Error eliminando cuenta:", error);
+      alert("No se pudo eliminar la cuenta.");
+    }
+  }
+});
+
+// inicializar
+document.addEventListener("DOMContentLoaded", loadUserProfile);
