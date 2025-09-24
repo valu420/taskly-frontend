@@ -41,13 +41,21 @@ export const resetPassword = (token, newPassword) =>
   http.post("/auth/reset-password", { token, newPassword });
 
 /**
- * Updates a user's profile.
+ * Gets the authenticated user's profile.
+ * @returns {Promise<Object>}
  */
-export const updateUser = (userId, data) =>
-  http.put(`/users/${userId}`, data);
+export const getUserProfile = () =>
+  http.get("/users/me");
 
 /**
- * Gets a user's profile by ID.
+ * Updates the authenticated user's profile.
+ * @param {Object} data - Fields to update.
  */
-export const getUserById = (userId) =>
-  http.get(`/users/${userId}`);
+export const updateUser = (data) =>
+  http.put("/users/me", data);
+
+/**
+ * Deletes the authenticated user's account.
+ */
+export const deleteUser = () =>
+  http.delete("/users/me");
