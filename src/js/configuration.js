@@ -1,10 +1,10 @@
 import { getUserProfile, updateUser, deleteUser } from "../services/userService.js";
 
 // referencias al DOM
-const firstNameInput = document.getElementById("profileName");
+const firstNameInput = document.getElementById("firstName");
 const lastNameInput = document.getElementById("lastName");
-const ageInput = document.getElementById("profileAge");
-const emailInput = document.getElementById("profileEmail");
+const ageInput = document.getElementById("Age");
+const emailInput = document.getElementById("Email");
 const saveButton = document.getElementById("saveProfile");
 const deleteButton = document.getElementById("deleteAccount");
 
@@ -14,10 +14,10 @@ async function loadUserProfile() {
     const response = await getUserProfile();
     const user = response.data;
 
-    firstNameInput.value = user.profileName || "";
+    firstNameInput.value = user.firstName || "";
     lastNameInput.value = user.lastName || "";
-    ageInput.value = user.profileAge || "";
-    emailInput.value = user.profileEmail || "";
+    ageInput.value = user.Age || "";
+    emailInput.value = user.Email || "";
   } catch (error) {
     console.error("Error cargando perfil:", error);
     alert("No se pudo cargar el perfil, intenta iniciar sesión de nuevo.");
