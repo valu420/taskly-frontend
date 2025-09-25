@@ -1690,3 +1690,26 @@ body {
     font-size: 0.85rem;
   }
 }
+
+/* Toast notification styles */
+.toast {
+  visibility: hidden;
+  min-width: 220px;
+  background: #fc6874;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 1rem;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}

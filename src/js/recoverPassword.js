@@ -1,4 +1,5 @@
 import http from "../api/http.js";
+import { showToast } from "./toast.js";
 
 /**
  * Envía el correo de recuperación de contraseña al backend.
@@ -11,9 +12,9 @@ async function sendRecoverEmail(email) {
     const res = await http.post("/auth/forgot-password", { email });
     console.log(res.data);
     if (res.data.message) {
-      alert("📧 " + res.data.message);
+      showToast("📧 " + res.data.message);
     } else {
-      alert("❌ " + (res.data.error || "No se pudo enviar el correo."));
+      showToast("❌ " + (res.data.error || "No se pudo enviar el correo."));
     }
   } catch (err) {
     alert("❌ Error de conexión con el servidor.");
@@ -24,7 +25,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   const email = document.getElementById("email").value.trim();
   if (!email) {
-    alert("⚠️ Por favor ingresa un correo válido.");
+    showToast("⚠️ Por favor ingresa un correo válido.");
     return;
   }
   sendRecoverEmail(email);
@@ -35,7 +36,7 @@ resend.addEventListener("click", (e) => {
   e.preventDefault();
   const email = document.getElementById("email").value.trim();
   if (!email) {
-    alert("⚠️ Ingresa tu correo antes de reenviar el enlace.");
+    showToast("⚠️ Ingresa tu correo antes de reenviar el enlace.");
     return;
   }
   sendRecoverEmail(email);

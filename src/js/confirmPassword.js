@@ -1,4 +1,5 @@
 import http from "../api/http.js";
+import { showToast } from "./toast.js";
 
 /**
  * Handles the password change form submission.
@@ -17,12 +18,12 @@ form.addEventListener("submit", async (e) => {
   const confirmPassword = document.getElementById("confirm-password").value.trim();
 
   if (!newPassword || !confirmPassword) {
-    alert("⚠️ Debes llenar ambos campos.");
+    showToast("⚠️ Debes llenar ambos campos.");
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    alert("❌ Las contraseñas no coinciden.");
+    showToast("❌ Las contraseñas no coinciden.");
     return;
   }
 
@@ -41,10 +42,10 @@ form.addEventListener("submit", async (e) => {
     console.log(data);
 
     if (response.ok && data.message) {
-      alert("✅ " + data.message);
+      showToast("✅ " + data.message);
       window.location.href = "login.html";
     } else {
-      alert("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
+      showToast("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
     }
   } catch (error) {
     alert("❌ Error de red o servidor.");

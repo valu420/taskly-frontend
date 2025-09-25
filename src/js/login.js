@@ -1,5 +1,5 @@
 import { login } from "../services/userService.js";
-
+import { showToast } from "./toast.js";
 /**
  * Initializes the login form event listener on DOMContentLoaded.
  * Handles user login, stores JWT token and user email in localStorage, and redirects to dashboard.
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "kanban.html";
       } catch (error) {
         console.error("Login error:", error);
-        alert("Invalid credentials. Please try again.");
+        showToast("Credenciales invalidas. Intenta de nuevo.");
       }
     });
   }
