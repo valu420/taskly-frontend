@@ -44,8 +44,9 @@ export const resetPassword = (token, newPassword) =>
  * Gets the authenticated user's profile.
  * @returns {Promise<Object>}
  */
-export const getUserProfile = () =>
-  http.get("/users/me");
+export const getUserProfile = () => {
+  return http.get("/users/me");
+};
 
 /**
  * Updates the authenticated user's profile.
