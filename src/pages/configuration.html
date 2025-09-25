@@ -19,12 +19,10 @@
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div>
-      <div class="profile">👤 <span id="userName">Cargando...</span></div>
+      <div class="profile"><span id="userName"></span></div>
       <div class="menu">
         <a href="kanban.html">🙂 Mis tareas</a>
         <a href="add-task.html">➕ Agregar tarea</a>
-        
-        
       </div>
     </div>
     <div class="bottom">
@@ -41,12 +39,11 @@
       <div class="profile-box">
         <img src="../../public/profile-placeholder.png" alt="Foto de perfil" class="profile-pic">
         <div class="profile-info">
-          <!-- notar: incluí tanto id como class para máxima compatibilidad -->
-          <p><strong>Nombre:</strong> <span id="profileName" class="profile-name">Usuario Ejemplo</span></p>
-          <p><strong>Email:</strong> <span id="profileEmail" class="email">usuario@ejemplo.com</span></p>
-          <p><strong>Edad:</strong> <span id="profileAge" class="age">N/A</span></p>
+          <p><strong>Nombre:</strong> <span id="firstName" class="profile-name"></span></p>
+          <p><strong>Email:</strong> <span id="Email" class="email"></span></p>
+          <p><strong>Edad:</strong> <span id="Age" class="age"></span></p>
         </div>
-        <button id="editProfileBtn" type="button">Actualizar Perfil</button>
+        <button id="editProfileBtn" type="button">✏️ Editar Perfil</button>
       </div>
 
       <!-- Formulario de actualización (inicialmente oculto) -->
@@ -55,39 +52,28 @@
 
         <!-- Nombre -->
         <div class="input-group">
-          <input type="text" id="newName" placeholder="Nombre Completo" required>
+          <input type="text" id="firstName" placeholder="Nombre" required>
         </div>
 
-        <!-- Email -->
+        <!-- Apellido -->
         <div class="input-group">
-          <input type="email" id="newEmail" placeholder="Email" required>
+          <input type="text" id="lastName" placeholder="Apellido" required>
         </div>
 
         <!-- Edad -->
         <div class="input-group">
-          <input type="number" id="newAge" placeholder="Edad" min="0">
+          <input type="number" id="age" placeholder="Edad" min="0">
         </div>
 
-        <!-- Contraseña actual -->
+        <!-- Email (solo lectura) -->
         <div class="input-group">
-          <input type="password" id="currentPassword" placeholder="Contraseña Actual" required>
+          <input type="email" id="email" placeholder="Email" readonly>
         </div>
 
-        <!-- Nueva contraseña -->
-        <div class="input-group">
-          <input type="password" id="newPassword" placeholder="Nueva Contraseña">
+        <div class="actions">
+          <button type="button" id="saveProfile">💾 Guardar Cambios</button>
+          <button type="button" id="deleteAccount" class="danger">🗑️ Eliminar Cuenta</button>
         </div>
-
-        <!-- Requisitos de la nueva contraseña -->
-        <ul id="passwordRequirements" class="requirements">
-          <li id="req-length" class="invalid">❌ Mínimo 8 caracteres</li>
-          <li id="req-upper" class="invalid">❌ Una letra mayúscula</li>
-          <li id="req-lower" class="invalid">❌ Una letra minúscula</li>
-          <li id="req-number" class="invalid">❌ Un número</li>
-          <li id="req-special" class="invalid">❌ Un carácter especial (!@#$%^&*)</li>
-        </ul>
-
-        <button type="submit">Guardar Cambios</button>
       </form>
 
     </section>
@@ -99,51 +85,26 @@
 </footer>
 
 <script>
-  /* Mantener toggle del sidebar (no tocado) */
+  /* Toggle sidebar */
   function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("active");
   }
 
-  /* Pequeño script para asegurar que el botón "Actualizar Perfil" funcione:
-     - abre/cierra el formulario
-     - precarga los datos visibles en la tarjeta (nombre, email, edad)
-     - añade comportamiento "ojito" para los inputs de contraseña
-     (este script es un fallback ligero; tu configuration.js puede añadir lógica extra) */
+  /* Mostrar/ocultar formulario de edición */
   document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.getElementById("editProfileBtn");
     const form = document.getElementById("configurationForm");
 
     editBtn && editBtn.addEventListener("click", () => {
       form.classList.toggle("hidden");
-
-      // Si abrimos el formulario, precargamos valores desde la tarjeta
       if (!form.classList.contains("hidden")) {
-        const profileNameEl = document.querySelector(".profile-name") || document.getElementById("profileName");
-        const profileEmailEl = document.querySelector(".email") || document.getElementById("profileEmail");
-        const profileAgeEl = document.querySelector(".age") || document.getElementById("profileAge");
-
-        const fullName = profileNameEl?.textContent?.trim() || "";
-        const email = profileEmailEl?.textContent?.trim() || "";
-        const age = profileAgeEl?.textContent?.trim() || "";
-
-        const inName = document.getElementById("newName");
-        const inEmail = document.getElementById("newEmail");
-        const inAge = document.getElementById("newAge");
-
-        if (inName) inName.value = fullName;
-        if (inEmail) inEmail.value = email;
-        if (inAge) inAge.value = age;
-
-        // focus y scroll suave
-        inName?.focus();
         form.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     });
-  
   });
 </script>
 
-<!-- Tu módulo principal de configuración (manténlo si existe y es correcto) -->
+<!-- Script principal de configuración -->
 <script type="module" src="../js/configuration.js"></script>
 </body>
 </html>
