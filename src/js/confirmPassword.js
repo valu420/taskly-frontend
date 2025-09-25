@@ -18,12 +18,12 @@ form.addEventListener("submit", async (e) => {
   const confirmPassword = document.getElementById("confirm-password").value.trim();
 
   if (!newPassword || !confirmPassword) {
-    showToast("⚠️ Debes llenar ambos campos.");
+    showToast("⚠️ Debes llenar ambos campos.", "error");
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    showToast("❌ Las contraseñas no coinciden.");
+    showToast("❌ Las contraseñas no coinciden.", "error");
     return;
   }
 
@@ -42,10 +42,10 @@ form.addEventListener("submit", async (e) => {
     console.log(data);
 
     if (response.ok && data.message) {
-      showToast("✅ " + data.message);
+      showToast("✅ " + data.message, "success");
       window.location.href = "login.html";
     } else {
-      showToast("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."));
+      showToast("❌ " + (data.message || data.error || "No se pudo cambiar la contraseña."), "error");
     }
   } catch (error) {
     alert("❌ Error de red o servidor.");

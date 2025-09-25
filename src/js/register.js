@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Validate password confirmation
       if (password !== confirmPassword) {
-        alert("Las Contraseñas no coinciden");
+        showToast("Las Contraseñas no coinciden", "error");
         return;
       }
 
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
           confirmPassword
         });
 
-        showToast("Registro Exitoso 🎉");
+        showToast("Registro Exitoso 🎉", "success");
         window.location.href = "login.html";
       } catch (error) {
         console.error("Registration error:", error);
-        showToast("Error en el registro. Intenta de nuevo.");
+        showToast("Error en el registro. Intenta de nuevo.", "error");
       }
     });
   }
