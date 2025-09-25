@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (submitBtn) submitBtn.textContent = "Editar tarea";
     } catch (error) {
       console.error("Error cargando tarea:", error);
-      showToast("No se pudo cargar la tarea para editar.");
+      showToast("No se pudo cargar la tarea para editar.", "error");
     }
   }
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Basic validation
     if (!title || !date || !hour) {
-      showToast("Por favor completa todos los campos.");
+      showToast("Por favor completa todos los campos.", "error");
       return;
     }
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           hour,
           completed
         });
-        showToast("Tarea actualizada con éxito.");
+        showToast("Tarea actualizada con éxito.", "success");
         window.location.href = "kanban.html";
       } else {
         // Create new task
@@ -108,12 +108,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           hour,
           completed
         });
-        showToast("Tarea creada con éxito.");
+        showToast("Tarea creada con éxito.", "success");
         form.reset();
       }
     } catch (error) {
       console.error("Error saving task:", error);
-      showToast("No se pudo guardar la tarea. Intenta de nuevo.");
+      showToast("No se pudo guardar la tarea.", "error");
     }
   });
 

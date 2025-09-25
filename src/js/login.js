@@ -29,9 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Redirects to kanban
         window.location.href = "kanban.html";
+        showToast("¡Inicio de sesión exitoso!", "success");
       } catch (error) {
         console.error("Login error:", error);
-        showToast("Credenciales invalidas. Intenta de nuevo.");
+        showToast("Credenciales invalidas. Intenta de nuevo.", "error");
       }
     });
   }

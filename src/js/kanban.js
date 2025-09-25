@@ -1,4 +1,5 @@
 import { getTasks, updateTask, deleteTask } from "../services/taskService.js";
+import { showToast } from "./toast.js";
 
 /**
  * Initializes the Kanban board on DOMContentLoaded.
@@ -70,8 +71,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             try {
               await deleteTask(task._id);
               taskCard.remove();
+              showToast("Tarea eliminada exitosamente", "success");
             } catch (error) {
               console.error("Error eliminando tarea:", error);
+              showToast("Error eliminando tarea", "error");
             }
           }
         });
