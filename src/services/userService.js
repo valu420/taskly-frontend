@@ -45,7 +45,7 @@ export const resetPassword = (token, newPassword) =>
  * @returns {Promise<Object>}
  */
 export const getUserProfile = () => {
-  return http.get("/users/me");
+  return http.get("/auth/me");
 };
 
 /**
