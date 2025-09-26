@@ -10,6 +10,9 @@ const lastNameInput = document.getElementById("lastName");
 const ageInput = document.getElementById("age");
 const emailInput = document.getElementById("email");
 
+const saveButton = document.getElementById("saveButton");
+const deleteButton = document.getElementById("deleteButton");
+
 async function loadUserProfile() {
   try {
     const response = await getUserProfile();
